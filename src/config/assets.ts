@@ -13,13 +13,12 @@ export interface ImageAsset {
 }
 
 // ─── Background Videos (rotating hero) ─────────────────────────────────
-// .mov files from picandvideocontentforslideshow (Safari-compatible)
-// For Chrome/Firefox, falls back to static image rotation
+// MP4 files for cross-browser support (H.264)
 export const BACKGROUND_VIDEOS: string[] = [
-  '/picandvideocontentforslideshow/ScreenRecording_02-06-2026%2020-55-36_1.mov',
-  '/picandvideocontentforslideshow/ScreenRecording_02-06-2026%2020-58-56_1.mov',
-  '/picandvideocontentforslideshow/ScreenRecording_02-06-2026%2021-01-57_1.mov',
-  '/picandvideocontentforslideshow/ScreenRecording_02-06-2026%2021-33-42_1.mov',
+  '/picandvideocontentforslideshow/video-1.mp4',
+  '/picandvideocontentforslideshow/video-2.mp4',
+  '/picandvideocontentforslideshow/video-3.mp4',
+  '/picandvideocontentforslideshow/video-4.mp4',
 ];
 
 export const HERO_FALLBACK_IMAGE = '/img/pexels/slide-outdoor-2.jpg';
