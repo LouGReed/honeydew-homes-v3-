@@ -13,13 +13,16 @@ export function HeroVideo() {
       {/* Layer 1: Background Rotating Videos */}
       <VideoRotator />
 
-      {/* Layer 2: Dark Gradient Overlay for legibility */}
+      {/* Layer 2: Duotone Color Overlay (green/gold tint) */}
+      <div className="hero-color-overlay" />
+
+      {/* Layer 3: Dark Gradient Overlay for legibility */}
       <div className="hero-overlay" />
 
-      {/* Layer 3: Film Grain Overlay */}
+      {/* Layer 4: Film Grain + Vignette Overlay */}
       <div className="hero-grain" />
 
-      {/* Layer 4: Content (nav, logo, CTA) */}
+      {/* Layer 5: Content (nav, logo, CTA) */}
       <div className="hero-content">
         {/* Navigation - Top Right */}
         <nav className="hero-nav">

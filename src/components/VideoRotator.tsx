@@ -14,6 +14,7 @@ export function VideoRotator() {
   const [showNext, setShowNext] = useState(false);
   const [allVideosFailed, setAllVideosFailed] = useState(false);
   const [failedVideos, setFailedVideos] = useState<Set<number>>(new Set());
+  const [isReady, setIsReady] = useState(false);
 
   const currentVideoRef = useRef<HTMLVideoElement>(null);
   const nextVideoRef = useRef<HTMLVideoElement>(null);
@@ -33,14 +34,17 @@ export function VideoRotator() {
     }
   };
 
-  // Handle video loaded successfully
-  const handleVideoLoaded = (index: number) => {
-    console.log(`Video ${index} loaded successfully:`, BACKGROUND_VIDEOS[index]);
+  // Handle video can play through (buffered enough)
+  const handleCanPlayThrough = (index: number) => {
+    console.log(`Video ${index} ready to play:`, BACKGROUND_VIDEOS[index]);
+    if (index === currentIndex && !isReady) {
+      setIsReady(true);
+    }
   };
 
   // Rotation timer
   useEffect(() => {
-    if (allVideosFailed || totalVideos <= 1) return;
+    if (allVideosFailed || totalVideos <= 1 || !isReady) return;
 
     const rotationTimer = setInterval(() => {
       // Calculate next index, skipping failed videos
@@ -66,7 +70,7 @@ export function VideoRotator() {
         setCurrentIndex(next);
         setShowNext(false);
 
-        // Play the current video
+        // Reset and play the current video
         if (currentVideoRef.current) {
           currentVideoRef.current.currentTime = 0;
           currentVideoRef.current.play().catch(() => {});
@@ -75,16 +79,16 @@ export function VideoRotator() {
     }, VIDEO_ROTATION_INTERVAL);
 
     return () => clearInterval(rotationTimer);
-  }, [currentIndex, totalVideos, allVideosFailed, failedVideos]);
+  }, [currentIndex, totalVideos, allVideosFailed, failedVideos, isReady]);
 
-  // Initial play
+  // Initial play when ready
   useEffect(() => {
-    if (currentVideoRef.current) {
+    if (isReady && currentVideoRef.current) {
       currentVideoRef.current.play().catch((e) => {
         console.error('Initial video play failed:', e);
       });
     }
-  }, []);
+  }, [isReady]);
 
   // Fallback if all videos fail
   if (allVideosFailed) {
@@ -110,9 +114,10 @@ export function VideoRotator() {
         muted
         playsInline
         loop
+        preload="auto"
         poster={HERO_FALLBACK_IMAGE}
         onError={() => handleVideoError(currentIndex)}
-        onLoadedData={() => handleVideoLoaded(currentIndex)}
+        onCanPlayThrough={() => handleCanPlayThrough(currentIndex)}
       >
         <source src={BACKGROUND_VIDEOS[currentIndex]} type="video/mp4" />
       </video>
@@ -126,9 +131,10 @@ export function VideoRotator() {
         muted
         playsInline
         loop
+        preload="auto"
         poster={HERO_FALLBACK_IMAGE}
         onError={() => handleVideoError(nextIndex)}
-        onLoadedData={() => handleVideoLoaded(nextIndex)}
+        onCanPlayThrough={() => handleCanPlayThrough(nextIndex)}
       >
         <source src={BACKGROUND_VIDEOS[nextIndex]} type="video/mp4" />
       </video>
