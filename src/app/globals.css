@@ -578,10 +578,11 @@ h1, h2, h3, h4, h5, h6 {
 /* Logo image in hero lockup - Large, white, headline-like */
 .hero-lockup-logo {
   display: block;
-  height: 72px;
-  max-height: 80px;
+  height: clamp(32px, 5vw, 56px); /* Responsive: 32px mobile to 56px desktop */
   width: auto;
+  max-width: none;
   object-fit: contain;
+  flex-shrink: 0;
   /* Force white color via CSS filter */
   filter: brightness(0) invert(1);
 }
@@ -1396,6 +1397,17 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Large desktop: bigger logo */
+@media (min-width: 1024px) {
+  .hero-lockup-logo {
+    height: 56px;
+  }
+
+  .site-header-logo {
+    height: 48px;
+  }
+}
+
 @media (max-width: 900px) {
   .hero-lockup {
     top: 32px;
@@ -1403,8 +1415,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-lockup-logo {
-    height: 56px;
-    max-height: 60px;
+    height: 48px;
   }
 
   .hero-lockup-wordmark {
@@ -1417,8 +1428,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .site-header-logo {
-    height: 38px;
-    max-height: 38px;
+    height: 40px;
   }
 }
 
@@ -1450,8 +1460,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-lockup-logo {
-    height: 48px;
-    max-height: 52px;
+    height: 38px;
   }
 
   .hero-lockup-wordmark {
@@ -1478,7 +1487,6 @@ h1, h2, h3, h4, h5, h6 {
 
   .site-header-logo {
     height: 32px;
-    max-height: 32px;
   }
 
   /* Mobile: stack layout vertically */
@@ -1577,8 +1585,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-lockup-logo {
-    height: 40px;
-    max-height: 44px;
+    height: 32px;
   }
 
   .hero-lockup-tagline {
@@ -1597,7 +1604,6 @@ h1, h2, h3, h4, h5, h6 {
 
   .site-header-logo {
     height: 28px;
-    max-height: 30px;
   }
 }
 
@@ -1687,10 +1693,11 @@ h1, h2, h3, h4, h5, h6 {
 /* Logo image in site header */
 .site-header-logo {
   display: block;
-  height: 44px;
-  max-height: 48px;
+  height: clamp(32px, 4vw, 48px); /* Responsive: 32px mobile to 48px desktop */
   width: auto;
+  max-width: none;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 /* Text brand fallback */

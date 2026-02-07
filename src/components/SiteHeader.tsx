@@ -37,11 +37,10 @@ export function SiteHeader({ variant = 'transparent' }: SiteHeaderProps) {
               <Image
                 src={`${ASSET_PREFIX}/img/brand/honeydewlogo.png`}
                 alt="Honeydew Homes"
-                width={200}
-                height={44}
+                width={280}
+                height={56}
                 priority
                 className="site-header-logo"
-                style={{ height: '44px', width: 'auto' }}
               />
             </Link>
 

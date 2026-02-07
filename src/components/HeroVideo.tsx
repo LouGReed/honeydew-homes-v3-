@@ -89,7 +89,6 @@ export function HeroVideo() {
             height={80}
             priority
             className="hero-lockup-logo"
-            style={{ height: '72px', width: 'auto' }}
           />
         </Link>
         <p className="hero-lockup-tagline">
