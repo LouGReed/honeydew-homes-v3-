@@ -29,7 +29,7 @@
 
 @font-face {
   font-family: 'Canela';
-  src: url('/fonts/canela/CanelaText-Regular-Trial.otf') format('opentype');
+  src: url('/fonts/canela/Canela-Regular-Trial.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -37,7 +37,15 @@
 
 @font-face {
   font-family: 'Canela';
-  src: url('/fonts/canela/CanelaText-Bold-Trial.otf') format('opentype');
+  src: url('/fonts/canela/Canela-Medium-Trial.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Canela';
+  src: url('/fonts/canela/Canela-Bold-Trial.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -80,8 +88,8 @@
   --accent-secondary: var(--color-green);
 
   /* Typography */
-  --font-display: 'Montreal', system-ui, sans-serif;
-  --font-body: 'Canela', Georgia, serif;
+  --font-display: 'Canela', Georgia, serif;
+  --font-body: 'Montreal', system-ui, sans-serif;
   --font-ui: 'Montreal', system-ui, sans-serif;
 
   /* Font Sizes - Fluid Typography */
@@ -516,13 +524,13 @@ h1, h2, h3, h4, h5, h6 {
   align-items: flex-start;
 }
 
-/* Wordmark: HONEYDEW HOMES — Montreal Bold, all caps, tight tracking */
+/* Wordmark: HONEYDEW HOMES — Canela Bold, editorial, slight positive tracking */
 .hero-lockup-wordmark {
   font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 72px);
+  font-size: clamp(48px, 6vw, 88px);
   font-weight: 700;
   color: var(--color-cream);
-  letter-spacing: -0.04em;
+  letter-spacing: 0.02em;
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
@@ -1242,7 +1250,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-lockup-wordmark {
-    font-size: clamp(28px, 5vw, 48px);
+    font-size: clamp(36px, 6vw, 56px);
   }
 
   .hero-lockup-tagline {
@@ -1276,7 +1284,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-lockup-wordmark {
-    font-size: clamp(24px, 7vw, 36px);
+    font-size: clamp(28px, 8vw, 42px);
   }
 
   .hero-lockup-tagline {
