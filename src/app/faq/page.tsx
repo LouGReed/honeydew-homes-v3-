@@ -5,7 +5,7 @@ import { BOOK_URL } from '@/config/site';
 export default function FAQPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader variant="solid" />
 
       {/* Hero */}
       <section className="page-hero">
@@ -34,7 +34,7 @@ export default function FAQPage() {
               No pressure, no commitment.
             </p>
             <div style={{ marginTop: '32px' }}>
-              <Link href={BOOK_URL} className="btn btn-primary">
+              <Link href={BOOK_URL} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
                 Book a Walkthrough
               </Link>
             </div>

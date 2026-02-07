@@ -6,7 +6,7 @@ import { siteConfig } from '@/config/site';
 export default function ContactPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader variant="solid" />
 
       {/* Hero */}
       <section className="page-hero">

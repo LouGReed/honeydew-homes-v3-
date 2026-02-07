@@ -10,7 +10,7 @@ export function CTABand() {
           <p className="cta-band-subtitle">
             Book a walkthrough and we'll scope your project together.
           </p>
-          <Link href={BOOK_URL} className="btn btn-secondary">
+          <Link href={BOOK_URL} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
             Book a Walkthrough
           </Link>
         </div>

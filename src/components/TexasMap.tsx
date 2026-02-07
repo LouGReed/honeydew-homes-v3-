@@ -1,68 +1,72 @@
-export function TexasMap() {
+interface TexasMapProps {
+  variant?: 'hero' | 'detail';
+  showServiceRadius?: boolean;
+  className?: string;
+}
+
+export function TexasMap({ variant = 'hero', showServiceRadius = false, className = '' }: TexasMapProps) {
   return (
     <svg
-      viewBox="0 0 400 400"
-      className="about-map"
+      viewBox="0 0 400 420"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={`texas-map texas-map-${variant} ${className}`}
+      aria-label="Texas state map with Austin marked"
     >
-      {/* Texas State Outline */}
+      {/* Texas State Silhouette - Clean, minimal */}
       <path
-        d="M100,40 L180,35 L200,30 L260,35 L280,45 L320,45 L340,55 L355,70
-           L360,90 L365,120 L370,150 L375,180 L380,210 L375,240 L365,270
-           L355,295 L340,315 L320,335 L290,355 L260,370 L230,375 L200,380
-           L170,375 L140,365 L115,350 L95,330 L80,305 L70,275 L65,245
-           L60,215 L55,185 L50,155 L45,125 L50,100 L60,75 L75,55 L100,40 Z"
-        fill="#1F3B2D"
-        stroke="#162A20"
-        strokeWidth="2"
+        className="texas-map-state"
+        d="M125,45 L145,40 L165,36 L185,34 L205,33 L225,34 L245,36 L265,40 L285,46
+           L302,54 L316,64 L328,76 L338,90 L346,106 L352,124 L356,144 L358,166
+           L358,188 L356,210 L352,232 L346,252 L338,270 L328,286 L316,300 L302,312
+           L286,322 L268,330 L248,336 L228,340 L208,342 L188,342 L168,340 L148,336
+           L130,330 L114,322 L100,312 L88,300 L78,286 L70,270 L64,252 L60,232
+           L58,210 L58,188 L60,166 L64,144 L70,124 L78,106 L88,90 L100,76
+           L114,64 L125,45 Z"
+        fill="currentColor"
       />
 
-      {/* Austin Star */}
-      <g transform="translate(195, 230)">
-        {/* Star shape */}
-        <polygon
-          points="0,-20 5,-7 19,-7 8,3 12,17 0,9 -12,17 -8,3 -19,-7 -5,-7"
-          fill="#C9A24D"
-          stroke="#B08F3E"
-          strokeWidth="1"
-        />
-        {/* Glow effect */}
-        <circle
-          r="28"
-          fill="none"
-          stroke="#C9A24D"
-          strokeWidth="2"
-          opacity="0.4"
+      {/* Service Radius Ring (for detail variant) */}
+      {showServiceRadius && (
+        <g className="texas-map-service-ring">
+          <circle
+            cx="205"
+            cy="245"
+            r="48"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeDasharray="3 5"
+            className="texas-map-radius"
+          />
+          <circle
+            cx="205"
+            cy="245"
+            r="32"
+            fill="currentColor"
+            opacity="0.08"
+            className="texas-map-radius-glow"
+          />
+        </g>
+      )}
+
+      {/* Austin Star Marker */}
+      <g className="texas-map-marker" transform="translate(205, 245)">
+        {/* Star */}
+        <path
+          d="M0,-12 L2.8,-3.7 L11.4,-3.7 L4.9,2.3 L7.4,11.4 L0,6 L-7.4,11.4 L-4.9,2.3 L-11.4,-3.7 L-2.8,-3.7 Z"
+          className="texas-map-star"
         />
       </g>
 
       {/* Austin Label */}
       <text
-        x="195"
-        y="275"
+        x="205"
+        y="278"
         textAnchor="middle"
-        fontFamily="var(--font-display)"
-        fontSize="16"
-        fontWeight="800"
-        fill="#C9A24D"
-        letterSpacing="0.1em"
+        className="texas-map-label"
       >
         AUSTIN
-      </text>
-
-      {/* State label */}
-      <text
-        x="200"
-        y="150"
-        textAnchor="middle"
-        fontFamily="var(--font-display)"
-        fontSize="24"
-        fontWeight="800"
-        fill="#FAF8F4"
-        opacity="0.3"
-        letterSpacing="0.2em"
-      >
-        TEXAS
       </text>
     </svg>
   );

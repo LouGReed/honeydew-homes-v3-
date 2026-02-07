@@ -5,7 +5,7 @@ import { siteConfig, BOOK_URL } from '@/config/site';
 export default function ProcessPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader variant="solid" />
 
       {/* Hero */}
       <section className="page-hero">
@@ -17,59 +17,140 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Step 01 - Walkthrough */}
       <section className="section section-cream">
         <div className="container">
-          <div className="two-col" style={{ alignItems: 'flex-start' }}>
-            <div className="process-timeline">
-              {siteConfig.processSteps.map((step) => (
-                <div key={step.number} className="process-timeline-item">
-                  <div className="process-timeline-number">{step.number}</div>
-                  <div className="process-timeline-content">
-                    <h3>{step.title}</h3>
-                    <p>{step.description}</p>
-                    <p className="process-timeline-detail">{step.detail}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="two-col-text">
-              <div className="info-block" style={{ marginTop: 0 }}>
-                <h4>How we work with realtors</h4>
-                <ul>
-                  <li>Lockbox or key access — we'll coordinate</li>
-                  <li>Occupied homes OK — we've done hundreds</li>
-                  <li>Daily photo updates via text or email</li>
-                  <li>Single point of contact, start to finish</li>
-                  <li>Flexible scheduling around showings</li>
-                  <li>Photo-ready finishes, every time</li>
-                </ul>
-              </div>
-
-              <div className="info-block">
-                <h4>Communication cadence</h4>
-                <p>
-                  You'll hear from us every day your project is active.
-                  Photos of progress, any issues that come up, and
-                  confirmation when we're done.
-                </p>
-                <p style={{ marginTop: '12px' }}>
-                  Prefer text? Email? Phone calls? Just tell us.
-                </p>
-              </div>
-
-              <div className="info-block">
-                <h4>Access + logistics</h4>
-                <p>
-                  We work with lockboxes, codes, keys — whatever makes
-                  sense for the property. For occupied homes, we coordinate
-                  directly with tenants or through you.
-                </p>
-              </div>
+          <div className="process-editorial-step">
+            <div className="process-editorial-number">01</div>
+            <div className="process-editorial-content">
+              <h2 className="process-editorial-title">Walkthrough</h2>
+              <p className="process-editorial-desc">
+                We meet at the property. You show us the scope. We take notes,
+                ask questions, and get aligned on priorities.
+              </p>
+              <p className="process-editorial-detail">24–48 hour scheduling</p>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Work Image Band */}
+      <section className="editorial-image-band-wide">
+        <img
+          src="/img/pexels/slide-work-1.png"
+          alt="Work in progress"
+          loading="lazy"
+          className="editorial-image-wide"
+        />
+      </section>
+
+      {/* Step 02 - Scope + Estimate */}
+      <section className="section section-sand">
+        <div className="container">
+          <div className="process-editorial-step">
+            <div className="process-editorial-number">02</div>
+            <div className="process-editorial-content">
+              <h2 className="process-editorial-title">Scope + Estimate</h2>
+              <p className="process-editorial-desc">
+                Clear line items. No surprises. You see exactly what we are doing
+                and what it costs before we start.
+              </p>
+              <p className="process-editorial-detail">Sent same day</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Step 03 - Schedule + Crew */}
+      <section className="section section-cream">
+        <div className="container">
+          <div className="process-editorial-step">
+            <div className="process-editorial-number">03</div>
+            <div className="process-editorial-content">
+              <h2 className="process-editorial-title">Schedule + Crew</h2>
+              <p className="process-editorial-desc">
+                We lock in dates and assign your team. One point of contact
+                from start to finish.
+              </p>
+              <p className="process-editorial-detail">Single point of contact</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Work Image Band */}
+      <section className="editorial-image-band-wide">
+        <img
+          src="/img/pexels/slide-work-2.png"
+          alt="Completed work"
+          loading="lazy"
+          className="editorial-image-wide"
+        />
+      </section>
+
+      {/* Step 04 - Daily Updates */}
+      <section className="section section-sand">
+        <div className="container">
+          <div className="process-editorial-step">
+            <div className="process-editorial-number">04</div>
+            <div className="process-editorial-content">
+              <h2 className="process-editorial-title">Daily Updates</h2>
+              <p className="process-editorial-desc">
+                Photo check-ins every day until done. You always know where
+                we are and what is happening.
+              </p>
+              <p className="process-editorial-detail">Text or email</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Step 05 - Final Walkthrough */}
+      <section className="section section-cream">
+        <div className="container">
+          <div className="process-editorial-step">
+            <div className="process-editorial-number">05</div>
+            <div className="process-editorial-content">
+              <h2 className="process-editorial-title">Final Walkthrough</h2>
+              <p className="process-editorial-desc">
+                Punch list closed. Keys ready. Your listing is photo-ready
+                and market-ready.
+              </p>
+              <p className="process-editorial-detail">Photo-ready handoff</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How We Work Info */}
+      <section className="section section-sand">
+        <div className="container">
+          <div className="editorial-block">
+            <div className="editorial-block-header">
+              <h2 className="editorial-title">Working with realtors</h2>
+            </div>
+            <div className="editorial-block-body">
+              <ul className="process-features-list">
+                <li>Lockbox or key access — we coordinate</li>
+                <li>Occupied homes OK — we have done hundreds</li>
+                <li>Daily photo updates via text or email</li>
+                <li>Single point of contact, start to finish</li>
+                <li>Flexible scheduling around showings</li>
+                <li>Photo-ready finishes, every time</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quiet Lifestyle Image - Before CTA */}
+      <section className="editorial-image-quiet">
+        <img
+          src="/img/pexels/slide-home-1.jpg"
+          alt="Austin home"
+          loading="lazy"
+          className="editorial-image-mono"
+        />
       </section>
 
       {/* CTA */}
@@ -78,7 +159,7 @@ export default function ProcessPage() {
           <h2 className="cta-fullbleed-title">
             Ready to get started?
           </h2>
-          <Link href={BOOK_URL} className="btn">
+          <Link href={BOOK_URL} className="btn" target="_blank" rel="noopener noreferrer">
             Book a Walkthrough
           </Link>
         </div>

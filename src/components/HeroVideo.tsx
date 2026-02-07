@@ -32,7 +32,7 @@ export function HeroVideo() {
                 {link.label}
               </Link>
             ))}
-            <Link href={BOOK_URL} className="btn btn-primary">
+            <Link href={BOOK_URL} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
               Book a Walkthrough
             </Link>
           </div>
@@ -79,6 +79,8 @@ export function HeroVideo() {
               <Link
                 href={BOOK_URL}
                 className="btn btn-primary"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Book a Walkthrough

@@ -22,7 +22,7 @@ export function PageNav() {
                   {link.label}
                 </Link>
               ))}
-              <Link href={BOOK_URL} className="btn btn-primary">
+              <Link href={BOOK_URL} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
                 Book a Walkthrough
               </Link>
             </nav>
@@ -70,6 +70,8 @@ export function PageNav() {
               <Link
                 href={BOOK_URL}
                 className="btn btn-primary"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Book a Walkthrough

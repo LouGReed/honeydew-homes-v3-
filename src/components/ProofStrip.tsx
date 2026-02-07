@@ -7,8 +7,7 @@ export function ProofStrip() {
         <div className="proof-strip-inner">
           {siteConfig.proofPoints.map((point, index) => (
             <div key={index} className="proof-chip">
-              <span className="proof-chip-icon">{point.icon}</span>
-              <span className="proof-chip-text">{point.label}</span>
+              <span className="proof-chip-text">{point}</span>
             </div>
           ))}
         </div>
