@@ -3127,9 +3127,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .about-validation-logo-link img {
-  height: 130px;
+  height: 180px;
   width: auto;
-  max-width: 480px;
+  max-width: 560px;
   filter: grayscale(100%) brightness(0.3);
   opacity: 0.9;
   image-rendering: auto;
@@ -3236,7 +3236,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .about-validation-logo-link img {
-    height: 100px;
+    height: 140px;
   }
 }
 
@@ -3304,7 +3304,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .about-validation-logo-link img {
-    height: 80px;
+    height: 100px;
   }
 
   .about-validation-logo-link:focus-visible {
