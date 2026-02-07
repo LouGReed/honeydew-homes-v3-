@@ -1,21 +1,9 @@
-import {
-  HeroVideo,
-  ProofStrip,
-  ServicesGrid,
-  Slideshow,
-  CTABand,
-  Footer,
-} from '@/components';
+import { HeroVideo } from '@/components';
 
 export default function LandingPage() {
   return (
-    <main>
+    <main className="landing-fixed">
       <HeroVideo />
-      <ProofStrip />
-      <ServicesGrid />
-      <Slideshow />
-      <CTABand />
-      <Footer />
     </main>
   );
 }

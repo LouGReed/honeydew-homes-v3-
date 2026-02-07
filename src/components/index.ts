@@ -1,4 +1,5 @@
 export { HeroVideo } from './HeroVideo';
+export { HeroSlideshow } from './HeroSlideshow';
 export { ProofStrip } from './ProofStrip';
 export { ServicesGrid } from './ServicesGrid';
 export { Slideshow } from './Slideshow';
