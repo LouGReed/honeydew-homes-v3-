@@ -527,7 +527,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Wordmark: HONEYDEW HOMES — Canela Medium, editorial, slight positive tracking */
 .hero-lockup-wordmark {
   font-family: var(--font-display);
-  font-size: clamp(48px, 6vw, 88px);
+  font-size: clamp(44px, 5.4vw, 78px);
   font-weight: 500;
   color: var(--color-cream);
   letter-spacing: 0.02em;
@@ -546,7 +546,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.6;
   letter-spacing: 0.01em;
   line-height: 1.4;
-  margin: 10px 0 0 3px;
+  margin: 14px 0 0 3px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1250,12 +1250,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-lockup-wordmark {
-    font-size: clamp(36px, 6vw, 56px);
+    font-size: clamp(32px, 5.4vw, 50px);
   }
 
   .hero-lockup-tagline {
     font-size: 15px;
-    margin-top: 8px;
+    margin-top: 12px;
   }
 }
 
@@ -1284,12 +1284,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-lockup-wordmark {
-    font-size: clamp(28px, 8vw, 42px);
+    font-size: clamp(26px, 7.2vw, 38px);
   }
 
   .hero-lockup-tagline {
     font-size: 13px;
-    margin-top: 8px;
+    margin-top: 12px;
   }
 
   /* Mobile: stack layout vertically */
