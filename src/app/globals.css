@@ -211,14 +211,14 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
-  padding: var(--space-md) var(--space-xl);
+  padding: 12px 24px;
   font-family: var(--font-ui);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  border-radius: var(--radius-sm);
-  transition: all var(--transition-base);
+  border-radius: 3px;
+  transition: opacity var(--transition-fast);
   white-space: nowrap;
 }
 
@@ -228,7 +228,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary:hover {
-  background-color: var(--color-green-light);
+  opacity: 0.88;
 }
 
 .btn-secondary {
@@ -322,12 +322,13 @@ h1, h2, h3, h4, h5, h6 {
   inset: 0;
   z-index: 3;
   background:
+    /* Top gradient for text anchoring (25-30% height, 25% opacity) */
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 28%),
     /* Top-left corner emphasis for lockup legibility */
-    radial-gradient(ellipse at 0% 0%, rgba(0, 0, 0, 0.55) 0%, transparent 50%),
-    /* Existing gradients */
-    linear-gradient(135deg, rgba(0, 0, 0, 0.45) 0%, transparent 50%),
-    linear-gradient(315deg, rgba(0, 0, 0, 0.35) 0%, transparent 50%),
-    linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 40%);
+    radial-gradient(ellipse at 0% 0%, rgba(0, 0, 0, 0.45) 0%, transparent 45%),
+    /* Subtle corner gradients */
+    linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, transparent 40%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 35%);
 }
 
 /* ─── Video Rotator ─────────────────────────────────────────────────── */
@@ -446,7 +447,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: var(--space-lg);
+  padding: 40px var(--space-lg) var(--space-lg);
 }
 
 .hero-nav {
@@ -507,7 +508,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-lockup {
   position: absolute;
-  top: 32px;
+  top: 40px;
   left: 56px;
   z-index: 6;
   display: flex;
@@ -534,10 +535,10 @@ h1, h2, h3, h4, h5, h6 {
   font-size: clamp(13px, 1.2vw, 15px);
   font-weight: 400;
   color: var(--color-cream);
-  opacity: 0.65;
+  opacity: 0.55;
   letter-spacing: 0.01em;
   line-height: 1.4;
-  margin: 24px 0 0 0;
+  margin: 32px 0 0 0;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1236,7 +1237,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 900px) {
   .hero-lockup {
-    top: 28px;
+    top: 32px;
     left: 32px;
   }
 
@@ -1245,8 +1246,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-lockup-tagline {
-    font-size: 14px;
-    margin-top: 20px;
+    font-size: 13px;
+    margin-top: 24px;
   }
 }
 
@@ -1270,7 +1271,7 @@ h1, h2, h3, h4, h5, h6 {
 
   /* Hero Lockup - Mobile */
   .hero-lockup {
-    top: 20px;
+    top: 24px;
     left: 20px;
   }
 
@@ -1279,8 +1280,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-lockup-tagline {
-    font-size: 12px;
-    margin-top: 16px;
+    font-size: 11px;
+    margin-top: 20px;
   }
 
   /* Mobile: stack layout vertically */
