@@ -8,3 +8,6 @@ export { CTABand } from './CTABand';
 export { Footer } from './Footer';
 export { TexasMap } from './TexasMap';
 export { PageNav } from './PageNav';
+export { SiteHeader } from './SiteHeader';
+export { SiteFooter } from './SiteFooter';
+export { FAQAccordion } from './FAQAccordion';

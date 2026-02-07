@@ -16,9 +16,9 @@ export interface ImageAsset {
 // MP4 files for cross-browser support (H.264)
 export const BACKGROUND_VIDEOS: string[] = [
   '/picandvideocontentforslideshow/video-1.mp4',
+  '/picandvideocontentforslideshow/video-4.mp4',
   '/picandvideocontentforslideshow/video-2.mp4',
   '/picandvideocontentforslideshow/video-3.mp4',
-  '/picandvideocontentforslideshow/video-4.mp4',
 ];
 
 export const HERO_FALLBACK_IMAGE = '/picandvideocontentforslideshow/hero-poster.jpg';

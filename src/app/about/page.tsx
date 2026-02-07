@@ -1,134 +1,113 @@
 import Link from 'next/link';
-import { PageNav, TexasMap, CTABand, Footer } from '@/components';
-import { ABOUT_IMAGES } from '@/config/assets';
-import { BOOK_URL, siteConfig } from '@/config/site';
+import { SiteHeader, SiteFooter } from '@/components';
+import { siteConfig, BOOK_URL } from '@/config/site';
 
 export default function AboutPage() {
   return (
     <main>
-      <PageNav />
+      <SiteHeader />
 
-      {/* Hero with Texas Map */}
-      <section className="about-hero">
+      {/* Hero */}
+      <section className="page-hero">
         <div className="container">
-          <div className="about-hero-content">
-            <div className="about-map-container">
-              <TexasMap />
+          <h1 className="page-hero-title">About Honeydew</h1>
+          <p className="page-hero-subtitle">
+            Austin-based make-ready specialists. Realtor-first since day one.
+          </p>
+        </div>
+      </section>
+
+      {/* Origin Story */}
+      <section className="section section-cream">
+        <div className="container">
+          <div className="two-col">
+            <div className="two-col-text">
+              <h2 className="section-title">Built for this market</h2>
+              <p className="body-lg">
+                We started Honeydew because Austin realtors deserved better.
+                Too many contractors miss deadlines, skip details, or disappear
+                mid-project.
+              </p>
+              <p className="body-base" style={{ marginTop: '16px' }}>
+                We're a team of Austin locals who understand what's at stake
+                when a listing hits the market. Your reputation. Your client's
+                timeline. The sale itself.
+              </p>
+              <p className="body-base" style={{ marginTop: '16px' }}>
+                So we built a company around realtor needs: fast turnarounds,
+                clear communication, and finishes that photograph beautifully.
+              </p>
             </div>
-            <div className="about-hero-text">
-              <h1>Austin's Make-Ready Partner</h1>
-              <p>
-                We're a team of Austin locals who understand what it takes to get a home
-                show-ready. From punch lists to full turnovers, we handle the details
-                so you can focus on your clients.
-              </p>
-              <p>
-                Serving Austin, Round Rock, Cedar Park, Georgetown, and Pflugerville—we
-                know these neighborhoods because we live in them.
-              </p>
-              <Link href={BOOK_URL} className="btn btn-primary">
-                Book a Walkthrough
-              </Link>
+            <div className="two-col-image">
+              <img
+                src="/img/pexels/gallery-shuraeva-full.jpg"
+                alt="Honeydew team at work"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Editorial Sections */}
-      <section className="about-editorial">
+      {/* Values */}
+      <section className="section section-sand">
         <div className="container">
-          {/* Block 1 */}
-          <div className="about-editorial-block">
-            <div className="about-editorial-image">
-              {ABOUT_IMAGES[0] && (
-                <img
-                  src={ABOUT_IMAGES[0].src}
-                  alt={ABOUT_IMAGES[0].alt}
-                  loading="lazy"
-                />
-              )}
-            </div>
-            <div className="about-editorial-text">
-              <h2>Built for Realtors</h2>
-              <p>
-                We get it—your reputation rides on every listing. That's why we treat
-                every project like it's our own. Clear communication, daily photo updates,
-                and timelines you can trust.
-              </p>
-              <p>
-                Whether it's a quick punch list or a complete turnover, we're here to
-                make you look good.
-              </p>
-            </div>
+          <div className="section-header-centered">
+            <h2 className="section-title">How we work</h2>
           </div>
-
-          {/* Block 2 */}
-          <div className="about-editorial-block">
-            <div className="about-editorial-image">
-              {ABOUT_IMAGES[1] && (
-                <img
-                  src={ABOUT_IMAGES[1].src}
-                  alt={ABOUT_IMAGES[1].alt}
-                  loading="lazy"
-                />
-              )}
-            </div>
-            <div className="about-editorial-text">
-              <h2>Trusted by Compass</h2>
-              <p>
-                We're proud to work with some of Austin's top Compass agents. Our
-                track record speaks for itself—on-time delivery, clean finishes,
-                and homes that photograph beautifully.
-              </p>
-            </div>
+          <div className="values-grid">
+            {siteConfig.values.map((value, index) => (
+              <div key={index} className="value-item">
+                <h3>{value.title}</h3>
+                <p>{value.description}</p>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          {/* Block 3 */}
-          <div className="about-editorial-block">
-            <div className="about-editorial-image">
-              {ABOUT_IMAGES[2] && (
-                <img
-                  src={ABOUT_IMAGES[2].src}
-                  alt={ABOUT_IMAGES[2].alt}
-                  loading="lazy"
-                />
-              )}
+      {/* Service Area */}
+      <section className="section section-cream">
+        <div className="container">
+          <div className="two-col">
+            <div className="two-col-image">
+              <img
+                src="/img/pexels/gallery-karpovich-full.jpg"
+                alt="Austin neighborhood"
+                loading="lazy"
+              />
             </div>
-            <div className="about-editorial-text">
-              <h2>Local Crews, Real Accountability</h2>
-              <p>
-                No subcontractor roulette. Our crews are Austin-based, background-checked,
-                and accountable. You'll have a single point of contact from walkthrough
-                to final sweep.
+            <div className="two-col-text">
+              <h2 className="section-title">Austin and beyond</h2>
+              <p className="body-lg">
+                We serve {siteConfig.serviceAreas.join(', ')}, and surrounding communities.
               </p>
-            </div>
-          </div>
-
-          {/* Block 4 */}
-          <div className="about-editorial-block">
-            <div className="about-editorial-image">
-              {ABOUT_IMAGES[3] && (
-                <img
-                  src={ABOUT_IMAGES[3].src}
-                  alt={ABOUT_IMAGES[3].alt}
-                  loading="lazy"
-                />
-              )}
-            </div>
-            <div className="about-editorial-text">
-              <h2>Photo-Ready Every Time</h2>
-              <p>
-                We know what photographers look for. Every surface, every detail,
-                every corner—we prep homes to show their best. Because first
-                impressions close deals.
+              <p className="body-base" style={{ marginTop: '16px' }}>
+                We know these neighborhoods because we live in them. Local crews,
+                local accountability, local pride.
               </p>
+              <div className="info-block">
+                <h4>Licensed & Insured</h4>
+                <p>{siteConfig.licensingNote}</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <CTABand />
-      <Footer />
+      {/* CTA */}
+      <section className="cta-fullbleed">
+        <div className="container">
+          <h2 className="cta-fullbleed-title">
+            Let's talk about your next listing
+          </h2>
+          <Link href={BOOK_URL} className="btn">
+            Book a Walkthrough
+          </Link>
+        </div>
+      </section>
+
+      <SiteFooter />
     </main>
   );
 }

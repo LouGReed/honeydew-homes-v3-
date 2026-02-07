@@ -7,16 +7,11 @@ const SLIDE_INTERVAL = 3000; // 3 seconds
 
 export function Slideshow() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [canAdvance, setCanAdvance] = useState(false);
-
-  // Video readiness tracking
-  const [readyVideos, setReadyVideos] = useState<Set<string>>(new Set());
 
   // Video resume tracking
   const resumeTimesRef = useRef<Record<string, number>>({});
   const videoRefsMap = useRef<Record<string, HTMLVideoElement | null>>({});
   const advanceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const minTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hasLoggedMount = useRef(false);
 
   const items = SLIDESHOW_IMAGES;
@@ -42,15 +37,6 @@ export function Slideshow() {
     console.log('ACTIVE GROUP', currentIndex, visibleImages.map(x => x.src));
   }, [currentIndex, visibleImages]);
 
-  // Mark video as ready
-  const markVideoReady = useCallback((src: string) => {
-    setReadyVideos((prev) => {
-      const next = new Set(prev);
-      next.add(src);
-      return next;
-    });
-  }, []);
-
   // Save video positions before leaving
   const saveVideoPositions = useCallback((slideItems: ImageAsset[]) => {
     slideItems.forEach((item) => {
@@ -64,129 +50,68 @@ export function Slideshow() {
     });
   }, []);
 
-  // Handle video canplay - apply resume time and start playing
+  // Handle video canPlay
   const handleVideoCanPlay = useCallback((src: string) => {
     const videoEl = videoRefsMap.current[src];
     if (!videoEl) return;
 
-    // Check if this video is in the visible set
-    const isVisible = visibleImages.some((item) => item.src === src);
-    if (!isVisible) return;
-
-    // Get saved time or use tiny offset
+    // Get saved time
     const savedTime = resumeTimesRef.current[src] || 0;
     const duration = videoEl.duration || Infinity;
 
-    // Apply resume time (clamped) or tiny offset
-    if (savedTime > 0) {
+    // Apply resume time or tiny offset
+    if (savedTime > 0.1) {
       const resumeTime = Math.min(savedTime, Math.max(0, duration - 0.25));
       videoEl.currentTime = resumeTime;
-    } else if (videoEl.currentTime === 0) {
+    } else if (videoEl.currentTime < 0.01) {
       videoEl.currentTime = 0.03;
     }
 
-    // Mark as ready
-    markVideoReady(src);
-
-    // Play the video
     videoEl.play().catch(() => {});
-  }, [visibleImages, markVideoReady]);
+  }, []);
 
   // Advance to next slide group
   const goToNext = useCallback(() => {
-    const currentItems = getVisibleImages();
-
-    // Save current video positions before leaving
-    saveVideoPositions(currentItems);
-
-    setCanAdvance(false);
+    saveVideoPositions(getVisibleImages());
     setCurrentIndex((i) => (i + 1) % totalSlides);
   }, [totalSlides, getVisibleImages, saveVideoPositions]);
 
-  // Handle video ended - reset saved time
+  // Handle video ended
   const handleVideoEnded = useCallback((src: string) => {
     resumeTimesRef.current[src] = 0;
   }, []);
 
-  // Minimum 3-second timer before allowing advance
-  useEffect(() => {
-    if (minTimeoutRef.current) {
-      clearTimeout(minTimeoutRef.current);
-    }
-
-    setCanAdvance(false);
-
-    const hasVideo = visibleImages.some((item) => item.type === 'video');
-
-    if (hasVideo) {
-      // Wait for all videos in current view to be ready
-      const checkReady = () => {
-        const allReady = visibleImages
-          .filter((item) => item.type === 'video')
-          .every((item) => readyVideos.has(item.src));
-
-        if (allReady) {
-          minTimeoutRef.current = setTimeout(() => {
-            setCanAdvance(true);
-          }, SLIDE_INTERVAL);
-        } else {
-          minTimeoutRef.current = setTimeout(checkReady, 100);
-        }
-      };
-      checkReady();
-    } else {
-      minTimeoutRef.current = setTimeout(() => {
-        setCanAdvance(true);
-      }, SLIDE_INTERVAL);
-    }
-
-    return () => {
-      if (minTimeoutRef.current) {
-        clearTimeout(minTimeoutRef.current);
-      }
-    };
-  }, [currentIndex, visibleImages, readyVideos]);
-
   // Auto-advance timer
   useEffect(() => {
-    if (!canAdvance) return;
-
     if (advanceTimeoutRef.current) {
       clearTimeout(advanceTimeoutRef.current);
     }
 
     advanceTimeoutRef.current = setTimeout(() => {
       goToNext();
-    }, 100);
+    }, SLIDE_INTERVAL);
 
     return () => {
       if (advanceTimeoutRef.current) {
         clearTimeout(advanceTimeoutRef.current);
       }
     };
-  }, [canAdvance, goToNext]);
+  }, [currentIndex, goToNext]);
 
   // Store video ref
   const setVideoRef = useCallback((src: string, el: HTMLVideoElement | null) => {
     videoRefsMap.current[src] = el;
   }, []);
 
-  // Check if a video is ready to show
-  const isVideoReady = useCallback((src: string) => {
-    return readyVideos.has(src);
-  }, [readyVideos]);
-
-  // Render media item (image or video)
+  // Render media item
   const renderMediaItem = (item: ImageAsset, loading: 'eager' | 'lazy' = 'lazy') => {
-    const isVideo = item.type === 'video';
-    const videoReady = isVideo ? isVideoReady(item.src) : true;
-
-    if (isVideo) {
+    if (item.type === 'video') {
       return (
         <video
           key={`video-${item.src}`}
           ref={(el) => setVideoRef(item.src, el)}
           src={item.src}
+          autoPlay
           muted
           playsInline
           loop
@@ -198,8 +123,6 @@ export function Slideshow() {
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center',
-            opacity: videoReady ? 1 : 0,
-            transition: 'opacity 0.3s ease-in-out',
           }}
         />
       );
@@ -210,12 +133,6 @@ export function Slideshow() {
         src={item.src}
         alt={item.alt}
         loading={loading}
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center',
-        }}
       />
     );
   };
@@ -229,12 +146,10 @@ export function Slideshow() {
 
         <div className="slideshow-container">
           <div className="slideshow-main">
-            {/* Primary large media */}
             <div className="slideshow-primary" key={`primary-${visibleImages[0]?.src}`}>
               {visibleImages[0] && renderMediaItem(visibleImages[0], 'eager')}
             </div>
 
-            {/* Secondary stacked media */}
             <div className="slideshow-secondary">
               {visibleImages[1] && (
                 <div className="slideshow-secondary-item" key={`sec1-${visibleImages[1].src}`}>
@@ -249,7 +164,6 @@ export function Slideshow() {
             </div>
           </div>
 
-          {/* Navigation dots */}
           <div className="slideshow-nav">
             {Array.from({ length: totalSlides }).map((_, index) => (
               <button
@@ -257,7 +171,6 @@ export function Slideshow() {
                 className={`slideshow-dot ${index === currentIndex ? 'active' : ''}`}
                 onClick={() => {
                   saveVideoPositions(getVisibleImages());
-                  setCanAdvance(false);
                   setCurrentIndex(index);
                 }}
                 aria-label={`Go to slide ${index + 1}`}
