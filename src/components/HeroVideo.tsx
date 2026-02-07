@@ -57,11 +57,11 @@ export function HeroVideo() {
           <Image
             src={`${ASSET_PREFIX}/img/brand/honeydewlogo.png`}
             alt="Honeydew Homes"
-            width={280}
-            height={60}
+            width={400}
+            height={80}
             priority
             className="hero-lockup-logo"
-            style={{ height: '48px', width: 'auto' }}
+            style={{ height: '72px', width: 'auto' }}
           />
         </Link>
         <p className="hero-lockup-tagline">
