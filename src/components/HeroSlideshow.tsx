@@ -4,31 +4,41 @@ import { useState, useEffect, useCallback, useRef, TouchEvent } from 'react';
 import { SLIDESHOW_IMAGES, ImageAsset } from '@/config/assets';
 
 const SLIDE_INTERVAL = 3000; // 3 seconds
-const DEBUG = false; // Set to true for debug logging
-
-function debugLog(...args: unknown[]) {
-  if (DEBUG) {
-    console.log('[Slideshow]', ...args);
-  }
-}
 
 export function HeroSlideshow() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [canAdvance, setCanAdvance] = useState(true);
 
   // Video resume tracking
   const resumeTimesRef = useRef<Record<string, number>>({});
-  const lastActivatedAtRef = useRef<number>(Date.now());
+  const activatedAtRef = useRef<number>(Date.now());
   const videoRefsMap = useRef<Record<string, HTMLVideoElement | null>>({});
   const advanceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const minTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hasLoggedMount = useRef(false);
 
-  const totalSlides = SLIDESHOW_IMAGES.length;
+  const items = SLIDESHOW_IMAGES;
+  const totalSlides = items.length;
 
   // Get current item
-  const currentItem = SLIDESHOW_IMAGES[currentIndex];
+  const currentItem = items[activeIndex];
   const isCurrentVideo = currentItem?.type === 'video';
+
+  // One-time mount logging
+  useEffect(() => {
+    if (!hasLoggedMount.current) {
+      console.log('SLIDESHOW', items.map(x => x.src));
+      hasLoggedMount.current = true;
+    }
+  }, [items]);
+
+  // Log on index change
+  useEffect(() => {
+    console.log('ACTIVE', activeIndex, items[activeIndex]?.src);
+  }, [activeIndex, items]);
 
   // Save video position before leaving
   const saveVideoPosition = useCallback((item: ImageAsset) => {
@@ -36,7 +46,6 @@ export function HeroSlideshow() {
       const videoEl = videoRefsMap.current[item.src];
       if (videoEl && !isNaN(videoEl.currentTime)) {
         resumeTimesRef.current[item.src] = videoEl.currentTime;
-        debugLog(`Saved position for ${item.src}: ${videoEl.currentTime.toFixed(2)}s`);
         videoEl.pause();
       }
     }
@@ -46,73 +55,67 @@ export function HeroSlideshow() {
   const goToNext = useCallback(() => {
     if (isTransitioning) return;
 
-    const currentItem = SLIDESHOW_IMAGES[currentIndex];
+    const current = items[activeIndex];
 
     // Check if we need to wait for minimum 3 seconds on video
-    if (currentItem?.type === 'video') {
-      const elapsed = Date.now() - lastActivatedAtRef.current;
-      if (elapsed < SLIDE_INTERVAL) {
-        debugLog(`Video hasn't played 3s yet (${elapsed}ms elapsed), waiting...`);
-        // Schedule advance after remaining time
-        if (advanceTimeoutRef.current) {
-          clearTimeout(advanceTimeoutRef.current);
-        }
-        advanceTimeoutRef.current = setTimeout(() => {
-          goToNext();
-        }, SLIDE_INTERVAL - elapsed);
-        return;
-      }
+    if (current?.type === 'video' && !canAdvance) {
+      // Wait for canAdvance to become true
+      return;
     }
 
     // Save current video position before leaving
-    if (currentItem) {
-      saveVideoPosition(currentItem);
+    if (current) {
+      saveVideoPosition(current);
     }
 
     setIsTransitioning(true);
-    const nextIndex = (currentIndex + 1) % totalSlides;
-    setCurrentIndex(nextIndex);
-    lastActivatedAtRef.current = Date.now();
-    debugLog(`Advancing to slide ${nextIndex}`);
+    setCanAdvance(false);
+
+    setActiveIndex((i) => (i + 1) % totalSlides);
+    activatedAtRef.current = Date.now();
+
     setTimeout(() => setIsTransitioning(false), 600);
-  }, [currentIndex, totalSlides, isTransitioning, saveVideoPosition]);
+  }, [activeIndex, totalSlides, isTransitioning, saveVideoPosition, canAdvance, items]);
 
   // Go to previous slide
   const goToPrev = useCallback(() => {
     if (isTransitioning) return;
 
-    const currentItem = SLIDESHOW_IMAGES[currentIndex];
-    if (currentItem) {
-      saveVideoPosition(currentItem);
+    const current = items[activeIndex];
+    if (current) {
+      saveVideoPosition(current);
     }
 
     setIsTransitioning(true);
-    const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-    setCurrentIndex(prevIndex);
-    lastActivatedAtRef.current = Date.now();
-    debugLog(`Going back to slide ${prevIndex}`);
+    setCanAdvance(false);
+
+    setActiveIndex((i) => (i - 1 + totalSlides) % totalSlides);
+    activatedAtRef.current = Date.now();
+
     setTimeout(() => setIsTransitioning(false), 600);
-  }, [currentIndex, totalSlides, isTransitioning, saveVideoPosition]);
+  }, [activeIndex, totalSlides, isTransitioning, saveVideoPosition, items]);
 
   // Go to specific slide
   const goToSlide = useCallback((index: number) => {
-    if (isTransitioning || index === currentIndex) return;
+    if (isTransitioning || index === activeIndex) return;
 
-    const currentItem = SLIDESHOW_IMAGES[currentIndex];
-    if (currentItem) {
-      saveVideoPosition(currentItem);
+    const current = items[activeIndex];
+    if (current) {
+      saveVideoPosition(current);
     }
 
     setIsTransitioning(true);
-    setCurrentIndex(index);
-    lastActivatedAtRef.current = Date.now();
-    debugLog(`Jumping to slide ${index}`);
+    setCanAdvance(false);
+
+    setActiveIndex(index);
+    activatedAtRef.current = Date.now();
+
     setTimeout(() => setIsTransitioning(false), 600);
-  }, [currentIndex, isTransitioning, saveVideoPosition]);
+  }, [activeIndex, isTransitioning, saveVideoPosition, items]);
 
   // Handle video becoming active (resume from saved position)
   useEffect(() => {
-    if (!isCurrentVideo) return;
+    if (!isCurrentVideo || !currentItem) return;
 
     const videoEl = videoRefsMap.current[currentItem.src];
     if (!videoEl) return;
@@ -124,29 +127,45 @@ export function HeroSlideshow() {
     const resumeTime = Math.min(savedTime, Math.max(0, duration - 0.25));
     videoEl.currentTime = resumeTime;
 
-    debugLog(`Resuming video ${currentItem.src} at ${resumeTime.toFixed(2)}s`);
-
     // Play the video
     const playPromise = videoEl.play();
     if (playPromise !== undefined) {
-      playPromise.catch((err) => {
-        debugLog(`Play failed for ${currentItem.src}:`, err);
+      playPromise.catch(() => {
+        // Autoplay blocked, that's ok
       });
     }
-  }, [currentIndex, isCurrentVideo, currentItem]);
+  }, [activeIndex, isCurrentVideo, currentItem]);
 
   // Handle video ended - reset saved time
   const handleVideoEnded = useCallback((src: string) => {
-    debugLog(`Video ended: ${src}, resetting saved time to 0`);
     resumeTimesRef.current[src] = 0;
   }, []);
 
+  // Minimum 3-second timer before allowing advance
+  useEffect(() => {
+    // Clear previous timer
+    if (minTimeoutRef.current) {
+      clearTimeout(minTimeoutRef.current);
+    }
+
+    // Set canAdvance to false initially
+    setCanAdvance(false);
+
+    // After 3 seconds, allow advance
+    minTimeoutRef.current = setTimeout(() => {
+      setCanAdvance(true);
+    }, SLIDE_INTERVAL);
+
+    return () => {
+      if (minTimeoutRef.current) {
+        clearTimeout(minTimeoutRef.current);
+      }
+    };
+  }, [activeIndex]);
+
   // Auto-advance timer
   useEffect(() => {
-    if (isPaused) {
-      if (advanceTimeoutRef.current) {
-        clearTimeout(advanceTimeoutRef.current);
-      }
+    if (isPaused || !canAdvance) {
       return;
     }
 
@@ -155,17 +174,17 @@ export function HeroSlideshow() {
       clearTimeout(advanceTimeoutRef.current);
     }
 
-    // Set up advance timer
+    // Set up advance timer - advance immediately since canAdvance is true
     advanceTimeoutRef.current = setTimeout(() => {
       goToNext();
-    }, SLIDE_INTERVAL);
+    }, 100); // Small delay to ensure state is settled
 
     return () => {
       if (advanceTimeoutRef.current) {
         clearTimeout(advanceTimeoutRef.current);
       }
     };
-  }, [isPaused, currentIndex, goToNext]);
+  }, [isPaused, canAdvance, goToNext]);
 
   // Touch handlers for mobile swipe
   const handleTouchStart = (e: TouchEvent) => {
@@ -203,13 +222,14 @@ export function HeroSlideshow() {
       {/* Slideshow frame */}
       <div className="hero-slideshow-frame">
         {/* Media items with crossfade */}
-        {SLIDESHOW_IMAGES.map((item, index) => (
+        {items.map((item, index) => (
           <div
-            key={item.src}
-            className={`hero-slideshow-slide ${index === currentIndex ? 'active' : ''}`}
+            key={`slide-${item.src}`}
+            className={`hero-slideshow-slide ${index === activeIndex ? 'active' : ''}`}
           >
             {item.type === 'video' ? (
               <video
+                key={`video-${item.src}`}
                 ref={(el) => setVideoRef(item.src, el)}
                 src={item.src}
                 muted
@@ -221,6 +241,7 @@ export function HeroSlideshow() {
               />
             ) : (
               <img
+                key={`img-${item.src}`}
                 src={item.src}
                 alt={item.alt}
                 loading={index === 0 ? 'eager' : 'lazy'}
@@ -233,16 +254,16 @@ export function HeroSlideshow() {
       {/* Caption */}
       <div className="hero-slideshow-caption">
         <span className="hero-slideshow-counter">
-          {String(currentIndex + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
+          {String(activeIndex + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
         </span>
       </div>
 
       {/* Navigation dots */}
       <div className="hero-slideshow-dots">
-        {SLIDESHOW_IMAGES.map((_, index) => (
+        {items.map((item, index) => (
           <button
-            key={index}
-            className={`hero-slideshow-dot ${index === currentIndex ? 'active' : ''}`}
+            key={`dot-${item.src}`}
+            className={`hero-slideshow-dot ${index === activeIndex ? 'active' : ''}`}
             onClick={() => goToSlide(index)}
             aria-label={`Go to slide ${index + 1}`}
           />
