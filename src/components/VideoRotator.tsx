@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   BACKGROUND_VIDEOS,
   HERO_FALLBACK_IMAGE,
@@ -9,77 +9,85 @@ import {
 } from '@/config/assets';
 
 export function VideoRotator() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [videoSupported, setVideoSupported] = useState(true);
+  const [showNext, setShowNext] = useState(false);
+  const [allVideosFailed, setAllVideosFailed] = useState(false);
+  const [failedVideos, setFailedVideos] = useState<Set<number>>(new Set());
 
-  const videoARef = useRef<HTMLVideoElement>(null);
-  const videoBRef = useRef<HTMLVideoElement>(null);
-  const [activeSlot, setActiveSlot] = useState<'A' | 'B'>('A');
+  const currentVideoRef = useRef<HTMLVideoElement>(null);
+  const nextVideoRef = useRef<HTMLVideoElement>(null);
 
   const totalVideos = BACKGROUND_VIDEOS.length;
 
-  // Check video support on mount
-  useEffect(() => {
-    const video = document.createElement('video');
-    const canPlayMov = video.canPlayType('video/quicktime') !== '';
-    const canPlayMp4 = video.canPlayType('video/mp4') !== '';
-    setVideoSupported(canPlayMov || canPlayMp4);
-  }, []);
+  // Handle video error - try next video
+  const handleVideoError = (index: number) => {
+    console.error(`Video ${index} failed to load:`, BACKGROUND_VIDEOS[index]);
+    const newFailed = new Set(failedVideos);
+    newFailed.add(index);
+    setFailedVideos(newFailed);
 
-  // Preload next video
-  const preloadNext = useCallback((index: number) => {
-    const nextVideo = activeSlot === 'A' ? videoBRef.current : videoARef.current;
-    if (nextVideo) {
-      nextVideo.src = BACKGROUND_VIDEOS[index];
-      nextVideo.load();
+    if (newFailed.size >= totalVideos) {
+      console.error('All videos failed to load');
+      setAllVideosFailed(true);
     }
-  }, [activeSlot]);
+  };
 
-  // Rotation logic
+  // Handle video loaded successfully
+  const handleVideoLoaded = (index: number) => {
+    console.log(`Video ${index} loaded successfully:`, BACKGROUND_VIDEOS[index]);
+  };
+
+  // Rotation timer
   useEffect(() => {
-    if (!videoSupported || totalVideos <= 1) return;
+    if (allVideosFailed || totalVideos <= 1) return;
 
     const rotationTimer = setInterval(() => {
-      const next = (activeIndex + 1) % totalVideos;
+      // Calculate next index, skipping failed videos
+      let next = (currentIndex + 1) % totalVideos;
+      let attempts = 0;
+      while (failedVideos.has(next) && attempts < totalVideos) {
+        next = (next + 1) % totalVideos;
+        attempts++;
+      }
+
+      if (attempts >= totalVideos) {
+        setAllVideosFailed(true);
+        return;
+      }
+
       setNextIndex(next);
-      preloadNext(next);
 
-      // Start transition
-      setIsTransitioning(true);
+      // Start crossfade
+      setShowNext(true);
 
-      // After crossfade, swap active slot
+      // After crossfade completes, swap
       setTimeout(() => {
-        setActiveSlot(prev => prev === 'A' ? 'B' : 'A');
-        setActiveIndex(next);
-        setIsTransitioning(false);
+        setCurrentIndex(next);
+        setShowNext(false);
 
-        // Start playing the new active video
-        const newActiveVideo = activeSlot === 'A' ? videoBRef.current : videoARef.current;
-        if (newActiveVideo) {
-          newActiveVideo.play().catch(() => {});
+        // Play the current video
+        if (currentVideoRef.current) {
+          currentVideoRef.current.currentTime = 0;
+          currentVideoRef.current.play().catch(() => {});
         }
       }, VIDEO_CROSSFADE_DURATION);
     }, VIDEO_ROTATION_INTERVAL);
 
     return () => clearInterval(rotationTimer);
-  }, [activeIndex, activeSlot, preloadNext, totalVideos, videoSupported]);
+  }, [currentIndex, totalVideos, allVideosFailed, failedVideos]);
 
-  // Initial video setup
+  // Initial play
   useEffect(() => {
-    if (videoARef.current && BACKGROUND_VIDEOS[0]) {
-      videoARef.current.src = BACKGROUND_VIDEOS[0];
-      videoARef.current.play().catch(() => setVideoSupported(false));
-    }
-    if (videoBRef.current && BACKGROUND_VIDEOS[1]) {
-      videoBRef.current.src = BACKGROUND_VIDEOS[1];
-      videoBRef.current.load();
+    if (currentVideoRef.current) {
+      currentVideoRef.current.play().catch((e) => {
+        console.error('Initial video play failed:', e);
+      });
     }
   }, []);
 
-  // Fallback to images if video not supported
-  if (!videoSupported) {
+  // Fallback if all videos fail
+  if (allVideosFailed) {
     return (
       <div className="video-rotator">
         <img
@@ -93,27 +101,37 @@ export function VideoRotator() {
 
   return (
     <div className="video-rotator">
-      {/* Video A */}
+      {/* Current Video - always visible unless transitioning */}
       <video
-        ref={videoARef}
-        className={`video-rotator-video ${activeSlot === 'A' && !isTransitioning ? 'active' : ''} ${activeSlot === 'A' && isTransitioning ? 'fading-out' : ''} ${activeSlot === 'B' && isTransitioning ? 'fading-in' : ''}`}
+        ref={currentVideoRef}
+        key={`current-${currentIndex}`}
+        className={`video-rotator-video active ${showNext ? 'fading-out' : ''}`}
         autoPlay
         muted
         playsInline
         loop
         poster={HERO_FALLBACK_IMAGE}
-      />
+        onError={() => handleVideoError(currentIndex)}
+        onLoadedData={() => handleVideoLoaded(currentIndex)}
+      >
+        <source src={BACKGROUND_VIDEOS[currentIndex]} type="video/mp4" />
+      </video>
 
-      {/* Video B */}
+      {/* Next Video (preloaded, fades in during transition) */}
       <video
-        ref={videoBRef}
-        className={`video-rotator-video ${activeSlot === 'B' && !isTransitioning ? 'active' : ''} ${activeSlot === 'B' && isTransitioning ? 'fading-out' : ''} ${activeSlot === 'A' && isTransitioning ? 'fading-in' : ''}`}
+        ref={nextVideoRef}
+        key={`next-${nextIndex}`}
+        className={`video-rotator-video ${showNext ? 'fading-in' : ''}`}
         autoPlay
         muted
         playsInline
         loop
         poster={HERO_FALLBACK_IMAGE}
-      />
+        onError={() => handleVideoError(nextIndex)}
+        onLoadedData={() => handleVideoLoaded(nextIndex)}
+      >
+        <source src={BACKGROUND_VIDEOS[nextIndex]} type="video/mp4" />
+      </video>
     </div>
   );
 }

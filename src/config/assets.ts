@@ -21,7 +21,7 @@ export const BACKGROUND_VIDEOS: string[] = [
   '/picandvideocontentforslideshow/video-4.mp4',
 ];
 
-export const HERO_FALLBACK_IMAGE = '/img/pexels/slide-outdoor-2.jpg';
+export const HERO_FALLBACK_IMAGE = '/picandvideocontentforslideshow/hero-poster.jpg';
 
 // Video rotation settings
 export const VIDEO_ROTATION_INTERVAL = 5000; // 5 seconds
