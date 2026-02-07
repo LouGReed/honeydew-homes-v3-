@@ -135,7 +135,7 @@ export default function AboutPage() {
                 <img src="/img/validation/sicara.PNG" alt="Sicara Design" />
               </a>
               <a
-                href="https://www.texasrealtors.com"
+                href="https://www.texasrealestate.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="about-validation-logo-link"
