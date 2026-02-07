@@ -4,10 +4,38 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { siteConfig, BOOK_URL, ASSET_PREFIX } from '@/config/site';
 import { VideoRotator } from './VideoRotator';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function HeroVideo() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Lock scroll on landing page and set viewport height for Safari
+  useEffect(() => {
+    // Store original overflow
+    const originalOverflow = document.body.style.overflow;
+
+    // Lock scroll
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
+    // Set --vh for Safari viewport height fix
+    const setVh = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    setVh();
+    window.addEventListener('resize', setVh);
+    window.addEventListener('orientationchange', setVh);
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.documentElement.style.overflow = '';
+      window.removeEventListener('resize', setVh);
+      window.removeEventListener('orientationchange', setVh);
+    };
+  }, []);
 
   return (
     <section className="hero hero-fixed">

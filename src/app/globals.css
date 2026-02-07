@@ -150,6 +150,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  background-color: #000; /* Black background to prevent white flash */
 }
 
 body {
@@ -157,8 +159,11 @@ body {
   font-size: var(--text-base);
   line-height: 1.6;
   color: var(--text-primary);
-  background-color: var(--bg-primary);
+  background-color: #000; /* Black background */
   overflow-x: hidden; /* Prevent horizontal scroll */
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 img, video {
@@ -312,15 +317,21 @@ h1, h2, h3, h4, h5, h6 {
 .hero {
   position: relative;
   width: 100%;
-  height: 100svh;
-  height: 100vh; /* Fallback for older browsers */
-  min-height: 600px;
+  /* Viewport height with multiple fallbacks for Safari */
+  height: 100vh; /* Fallback */
+  height: 100svh; /* Modern browsers */
+  height: calc(var(--vh, 1vh) * 100); /* JS fallback for old Safari */
+  min-height: 0; /* Remove min-height to prevent overflow */
+  max-height: 100svh;
+  max-height: 100vh;
   overflow: hidden;
+  background-color: #000;
 }
 
 @supports (height: 100svh) {
   .hero {
     height: 100svh;
+    max-height: 100svh;
   }
 }
 
@@ -618,33 +629,30 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
 }
 
-/* Mobile CTA - Bottom Left (thumb-friendly) */
+/* Mobile CTA - Bottom Left (thumb-friendly, no background container) */
 .hero-cta-mobile {
   display: none; /* Hidden on desktop */
   position: absolute;
   z-index: 10;
-  left: 20px;
-  bottom: 24px;
-  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  left: 16px;
+  bottom: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   font-family: var(--font-ui);
   font-size: 15px;
   font-weight: 600;
   color: #F0EFEC;
   letter-spacing: 0.01em;
-  text-decoration: none;
-  background: rgba(0, 0, 0, 0.35);
-  padding: 12px 20px;
-  border-radius: 6px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none; /* No background container */
+  padding: 12px 4px; /* Minimal padding, just for tap target */
   min-height: 44px;
-  display: none;
-  align-items: center;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  transition: background 0.2s ease;
+  min-width: 44px;
+  transition: opacity 0.2s ease;
 }
 
 .hero-cta-mobile:hover {
-  background: rgba(0, 0, 0, 0.5);
+  opacity: 0.85;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -669,14 +677,20 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
 }
 
-/* Landing page - hero only, no scroll */
+/* Landing page - hero only, no scroll, full viewport */
 .landing-hero-only {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
   height: 100svh;
-  height: 100vh; /* Fallback */
+  height: calc(var(--vh, 1vh) * 100);
+  max-height: 100vh;
   max-height: 100svh;
-  max-height: 100vh; /* Fallback */
   overflow: hidden;
-  overflow-x: hidden;
+  background-color: #000;
+  margin: 0;
+  padding: 0;
 }
 
 @supports (height: 100svh) {
@@ -687,12 +701,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-fixed {
-  height: 100svh;
-  height: 100vh; /* Fallback */
-  max-height: 100svh;
-  max-height: 100vh; /* Fallback */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
   overflow: hidden;
-  min-height: 0; /* Override base .hero min-height on mobile */
+  background-color: #000;
 }
 
 @supports (height: 100svh) {
@@ -1577,7 +1592,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 20px;
     bottom: calc(20px + env(safe-area-inset-bottom, 0px));
     font-size: 14px;
-    padding: 10px 16px;
+    padding: 12px 4px; /* Minimal padding for tap target */
   }
 
   .site-header-logo {
