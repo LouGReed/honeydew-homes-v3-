@@ -53,7 +53,7 @@ export function HeroVideo() {
       {/* Layer 6: Hero Lockup - Top Left */}
       <div className="hero-lockup">
         <h1 className="hero-lockup-wordmark">Honeydew Homes</h1>
-        <p className="hero-lockup-tagline">Preparing homes for market.</p>
+        <p className="hero-lockup-tagline">Make-ready construction in Austin, Texas. Finished before sundown.</p>
       </div>
 
       {/* Mobile Navigation */}
