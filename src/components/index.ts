@@ -7,6 +7,7 @@ export { Slideshow } from './Slideshow';
 export { CTABand } from './CTABand';
 export { Footer } from './Footer';
 export { TexasMap } from './TexasMap';
+export { TexasMapDots } from './TexasMapDots';
 export { PageNav } from './PageNav';
 export { SiteHeader } from './SiteHeader';
 export { SiteFooter } from './SiteFooter';

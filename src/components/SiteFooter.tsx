@@ -45,7 +45,7 @@ export function SiteFooter() {
                 <span>Austin & surrounding areas</span>
               </li>
               <li style={{ marginTop: '16px' }}>
-                <Link href={BOOK_URL} className="btn btn-primary" style={{ display: 'inline-block' }}>
+                <Link href={BOOK_URL} className="btn btn-primary" style={{ display: 'inline-block' }} target="_blank" rel="noopener noreferrer">
                   Book a Walkthrough
                 </Link>
               </li>

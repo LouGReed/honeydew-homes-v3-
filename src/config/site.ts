@@ -2,7 +2,7 @@
  * Honeydew Homes V3 - Site Configuration
  */
 
-export const BOOK_URL = 'PUT_HOUSECALLPRO_URL_HERE';
+export const BOOK_URL = 'https://book.housecallpro.com/book/HoneyDew-Homes/1a8cf53602dc4a05b78968e265bb487d?v2=true';
 
 export const siteConfig = {
   businessName: 'Honeydew Homes',

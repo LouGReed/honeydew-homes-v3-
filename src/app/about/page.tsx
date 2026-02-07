@@ -4,106 +4,134 @@ import { siteConfig, BOOK_URL } from '@/config/site';
 
 export default function AboutPage() {
   return (
-    <main>
-      <SiteHeader />
+    <main className="about-page">
+      <SiteHeader variant="solid" />
 
-      {/* Hero */}
-      <section className="page-hero">
-        <div className="container">
-          <h1 className="page-hero-title">About Honeydew</h1>
-          <p className="page-hero-subtitle">
-            Austin-based make-ready specialists. Realtor-first since day one.
-          </p>
-        </div>
-      </section>
+      {/* Hero Section - Dot Matrix Texas */}
+      <section className="about-texas-hero">
+        <div className="about-texas-hero-content">
+          {/* Typography Above Map */}
+          <div className="about-texas-header">
+            <h1 className="about-texas-headline">Built for Texas</h1>
+          </div>
 
-      {/* Origin Story */}
-      <section className="section section-cream">
-        <div className="container">
-          <div className="two-col">
-            <div className="two-col-text">
-              <h2 className="section-title">Built for this market</h2>
-              <p className="body-lg">
-                We started Honeydew because Austin realtors deserved better.
-                Too many contractors miss deadlines, skip details, or disappear
-                mid-project.
-              </p>
-              <p className="body-base" style={{ marginTop: '16px' }}>
-                We're a team of Austin locals who understand what's at stake
-                when a listing hits the market. Your reputation. Your client's
-                timeline. The sale itself.
-              </p>
-              <p className="body-base" style={{ marginTop: '16px' }}>
-                So we built a company around realtor needs: fast turnarounds,
-                clear communication, and finishes that photograph beautifully.
-              </p>
-            </div>
-            <div className="two-col-image">
+          {/* Texas Map Image */}
+          <div className="about-texas-map-container">
+            <div className="about-texas-map-wrapper">
               <img
-                src="/img/pexels/gallery-shuraeva-full.jpg"
-                alt="Honeydew team at work"
-                loading="lazy"
+                src="/texasmap/IMG_1452.PNG"
+                alt="Texas state map"
+                className="about-texas-map-image"
               />
+              {/* Austin Marker Overlay */}
+              <div className="austin-marker">
+                <svg
+                  className="austin-star"
+                  viewBox="0 0 100 100"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="50,0 61,35 98,35 68,57 79,91 50,70 21,91 32,57 2,35 39,35" />
+                </svg>
+                <span className="austin-label">AUSTIN</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Typography Below Map */}
+          <div className="about-texas-narrative">
+            <p className="about-texas-statement">
+              We started HONEYDEW because Austin realtors deserved better.
+            </p>
+            <p className="about-texas-body">
+              Too many contractors miss deadlines, skip details, or disappear
+              mid-project. We built a company around what actually matters:
+              fast turnarounds, clear communication, and finishes that
+              photograph beautifully.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Service Area Section */}
+      <section className="about-service-section">
+        <div className="container">
+          <div className="about-service-inner">
+            <div className="about-service-header">
+              <p className="about-service-location">Austin</p>
+              <span className="about-service-number">01</span>
+            </div>
+            <div className="about-service-content">
+              <h2 className="about-service-title">Austin and beyond</h2>
+              <div className="about-service-cities">
+                {siteConfig.serviceAreas.map((area, index) => (
+                  <span key={index} className="about-service-city">{area}</span>
+                ))}
+                <span className="about-service-city about-service-more">+ surrounding communities</span>
+              </div>
+              <p className="about-service-tagline">
+                Local crews. Local accountability. Local pride.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="section section-sand">
+      {/* How We Work */}
+      <section className="about-work-section">
         <div className="container">
-          <div className="section-header-centered">
-            <h2 className="section-title">How we work</h2>
+          <div className="about-work-header">
+            <span className="about-work-number">02</span>
+            <h2 className="about-work-title">How we work</h2>
           </div>
-          <div className="values-grid">
+          <div className="about-work-grid">
             {siteConfig.values.map((value, index) => (
-              <div key={index} className="value-item">
-                <h3>{value.title}</h3>
-                <p>{value.description}</p>
+              <div key={index} className="about-work-item">
+                <span className="about-work-item-index">0{index + 1}</span>
+                <h3 className="about-work-item-title">{value.title}</h3>
+                <p className="about-work-item-desc">{value.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Service Area */}
-      <section className="section section-cream">
+      {/* Credentials */}
+      <section className="about-credentials-section">
         <div className="container">
-          <div className="two-col">
-            <div className="two-col-image">
-              <img
-                src="/img/pexels/gallery-karpovich-full.jpg"
-                alt="Austin neighborhood"
-                loading="lazy"
-              />
-            </div>
-            <div className="two-col-text">
-              <h2 className="section-title">Austin and beyond</h2>
-              <p className="body-lg">
-                We serve {siteConfig.serviceAreas.join(', ')}, and surrounding communities.
-              </p>
-              <p className="body-base" style={{ marginTop: '16px' }}>
-                We know these neighborhoods because we live in them. Local crews,
-                local accountability, local pride.
-              </p>
-              <div className="info-block">
-                <h4>Licensed & Insured</h4>
-                <p>{siteConfig.licensingNote}</p>
-              </div>
+          <div className="about-credentials-inner">
+            <span className="about-credentials-number">03</span>
+            <div className="about-credentials-content">
+              <h2 className="about-credentials-title">Licensed and insured</h2>
+              <p className="about-credentials-text">{siteConfig.licensingNote}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="cta-fullbleed">
+      {/* Validation */}
+      <section className="about-validation-section">
         <div className="container">
-          <h2 className="cta-fullbleed-title">
-            Let's talk about your next listing
-          </h2>
-          <Link href={BOOK_URL} className="btn">
-            Book a Walkthrough
-          </Link>
+          <p className="about-validation-label">Trusted by</p>
+          <div className="about-validation-logos">
+            <img src="/img/validation/compass.png" alt="Compass" />
+            <img src="/img/validation/sicara.PNG" alt="Sicara" />
+            <img src="/img/validation/texas-realtors.png" alt="Texas Realtors" />
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="about-cta-section">
+        <div className="container">
+          <div className="about-cta-content">
+            <p className="about-cta-lead">
+              We are Texas-built, Austin-centered, and designed around realtor timelines.
+            </p>
+            <Link href={BOOK_URL} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              Book a Walkthrough
+            </Link>
+          </div>
         </div>
       </section>
 

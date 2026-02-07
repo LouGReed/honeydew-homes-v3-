@@ -4,7 +4,11 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { siteConfig, BOOK_URL } from '@/config/site';
 
-export function SiteHeader() {
+interface SiteHeaderProps {
+  variant?: 'transparent' | 'solid';
+}
+
+export function SiteHeader({ variant = 'transparent' }: SiteHeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -17,9 +21,15 @@ export function SiteHeader() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const headerClasses = [
+    'site-header',
+    scrolled ? 'scrolled' : '',
+    variant === 'solid' ? 'site-header-solid' : '',
+  ].filter(Boolean).join(' ');
+
   return (
     <>
-      <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
+      <header className={headerClasses}>
         <div className="container">
           <div className="site-header-inner">
             <Link href="/" className="site-header-brand">
@@ -32,7 +42,7 @@ export function SiteHeader() {
                   {link.label}
                 </Link>
               ))}
-              <Link href={BOOK_URL} className="site-header-cta">
+              <Link href={BOOK_URL} className="site-header-cta" target="_blank" rel="noopener noreferrer">
                 Book a Walkthrough
               </Link>
             </nav>
@@ -73,6 +83,8 @@ export function SiteHeader() {
               <Link
                 href={BOOK_URL}
                 className="btn btn-primary"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Book a Walkthrough
