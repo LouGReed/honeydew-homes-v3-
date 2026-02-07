@@ -68,10 +68,16 @@ export function HeroVideo() {
           Make-ready construction in Austin.<br />
           Done before the Texas sun sets.
         </p>
-        <Link href={BOOK_URL} className="hero-lockup-cta" target="_blank" rel="noopener noreferrer">
+        {/* Desktop CTA - hidden on mobile */}
+        <Link href={BOOK_URL} className="hero-lockup-cta hero-cta-desktop" target="_blank" rel="noopener noreferrer">
           Book a walkthrough →
         </Link>
       </div>
+
+      {/* Layer 7: Mobile CTA - Bottom Left (thumb-friendly) */}
+      <Link href={BOOK_URL} className="hero-cta-mobile" target="_blank" rel="noopener noreferrer">
+        Book a walkthrough →
+      </Link>
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
