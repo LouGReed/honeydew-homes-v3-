@@ -13,9 +13,9 @@ export interface ImageAsset {
 }
 
 // ─── Hero Video ────────────────────────────────────────────────────────
-// Replace with actual .mp4/.webm when available
-// For now, falls back to a static image
-export const HERO_VIDEO_SRC = '/video/hero.mp4';
+// Using .mov from picandvideocontentforslideshow (Safari-compatible)
+// For Chrome/Firefox, falls back to static image
+export const HERO_VIDEO_SRC = '/picandvideocontentforslideshow/ScreenRecording_02-06-2026%2020-55-36_1.mov';
 export const HERO_FALLBACK_IMAGE = '/picandvideocontentforslideshow/slide-outdoor-2.jpg';
 
 // ─── Brand Assets ──────────────────────────────────────────────────────
