@@ -32,11 +32,14 @@ export const LOGO_SRC = '/img/brand/honeydewlogo.png';
 
 // ─── Slideshow Images (curated from img/pexels) ────────────────────────
 // Single source of truth - ordered list of slideshow items
+// Supports mixed media: images (type: 'image') and videos (type: 'video')
 export const SLIDESHOW_IMAGES: ImageAsset[] = [
   { src: '/img/pexels/slide-family-1.jpg', alt: 'Family enjoying new home', orientation: 'horizontal', type: 'image' },
   { src: '/img/pexels/slide-family-2.jpg', alt: 'Family moment together', orientation: 'horizontal', type: 'image' },
+  { src: '/picandvideocontentforslideshow/video-1.mp4', alt: 'Property showcase', orientation: 'horizontal', type: 'video' },
   { src: '/img/pexels/slide-family-3.jpg', alt: 'Happy homeowners', orientation: 'horizontal', type: 'image' },
   { src: '/img/pexels/slide-home-1.jpg', alt: 'Beautiful home interior', orientation: 'horizontal', type: 'image' },
+  { src: '/picandvideocontentforslideshow/video-2.mp4', alt: 'Home walkthrough', orientation: 'horizontal', type: 'video' },
   { src: '/img/pexels/slide-outdoor-1.jpg', alt: 'Austin neighborhood', orientation: 'horizontal', type: 'image' },
   { src: '/img/pexels/slide-outdoor-2.jpg', alt: 'Texas landscape', orientation: 'horizontal', type: 'image' },
   { src: '/img/pexels/slide-work-1.png', alt: 'Make-ready in progress', orientation: 'horizontal', type: 'image' },
