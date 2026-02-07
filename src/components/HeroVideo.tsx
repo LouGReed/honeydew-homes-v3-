@@ -16,8 +16,8 @@ export function HeroVideo() {
       {/* Layer 2: Duotone Color Overlay (green/gold tint) */}
       <div className="hero-color-overlay" />
 
-      {/* Layer 3: Dark Gradient Overlay for legibility */}
-      <div className="hero-overlay" />
+      {/* Layer 3: Top-to-mid Gradient Overlay for legibility */}
+      <div className="hero-gradient-overlay" />
 
       {/* Layer 4: Film Grain + Vignette Overlay */}
       <div className="hero-grain" />
@@ -53,7 +53,13 @@ export function HeroVideo() {
       {/* Layer 6: Hero Lockup - Top Left */}
       <div className="hero-lockup">
         <h1 className="hero-lockup-wordmark">Honeydew Homes</h1>
-        <p className="hero-lockup-tagline">Make-ready construction in Austin, Texas. Finished before sundown.</p>
+        <p className="hero-lockup-tagline">
+          Make-ready construction in Austin.<br />
+          Done before the Texas sun sets.
+        </p>
+        <Link href={BOOK_URL} className="hero-lockup-cta" target="_blank" rel="noopener noreferrer">
+          Book a walkthrough →
+        </Link>
       </div>
 
       {/* Mobile Navigation */}
