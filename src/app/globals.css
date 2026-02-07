@@ -2202,3 +2202,101 @@ h1, h2, h3, h4, h5, h6 {
     padding: 60px 0 32px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   INSTITUTIONAL LANDING FOOTER
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.landing-footer {
+  background-color: var(--color-espresso);
+  padding: 48px 0;
+}
+
+.landing-footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+
+.landing-footer-primary {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.landing-footer-brand {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-cream);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.landing-footer-location {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--color-cream);
+  opacity: 0.5;
+}
+
+.landing-footer-secondary {
+  text-align: center;
+}
+
+.landing-footer-service {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--color-cream);
+  opacity: 0.45;
+  letter-spacing: 0.01em;
+}
+
+.landing-footer-tertiary {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  text-align: right;
+}
+
+.landing-footer-legal {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-cream);
+  opacity: 0.4;
+}
+
+.landing-footer-copyright {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-cream);
+  opacity: 0.4;
+}
+
+@media (max-width: 900px) {
+  .landing-footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .landing-footer-primary {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .landing-footer-tertiary {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-footer {
+    padding: 36px 0;
+  }
+}
