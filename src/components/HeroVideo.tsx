@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { siteConfig, BOOK_URL } from '@/config/site';
+import Image from 'next/image';
+import { siteConfig, BOOK_URL, ASSET_PREFIX } from '@/config/site';
 import { VideoRotator } from './VideoRotator';
 import { useState } from 'react';
 
@@ -52,7 +53,17 @@ export function HeroVideo() {
 
       {/* Layer 6: Hero Lockup - Top Left */}
       <div className="hero-lockup">
-        <h1 className="hero-lockup-wordmark">Honeydew Homes</h1>
+        <Link href="/" className="hero-lockup-logo-link">
+          <Image
+            src={`${ASSET_PREFIX}/img/brand/honeydewlogo.png`}
+            alt="Honeydew Homes"
+            width={280}
+            height={60}
+            priority
+            className="hero-lockup-logo"
+            style={{ height: '48px', width: 'auto' }}
+          />
+        </Link>
         <p className="hero-lockup-tagline">
           Make-ready construction in Austin.<br />
           Done before the Texas sun sets.

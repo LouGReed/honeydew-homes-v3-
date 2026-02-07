@@ -549,7 +549,22 @@ h1, h2, h3, h4, h5, h6 {
   align-items: flex-start;
 }
 
-/* Wordmark: HONEYDEW HOMES — Canela Medium, editorial, slight positive tracking */
+/* Logo link in hero lockup */
+.hero-lockup-logo-link {
+  display: block;
+  line-height: 0;
+}
+
+/* Logo image in hero lockup */
+.hero-lockup-logo {
+  display: block;
+  height: 48px;
+  max-height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Fallback wordmark (text version) - kept for reference */
 .hero-lockup-wordmark {
   font-family: var(--font-display);
   font-size: clamp(44px, 5.4vw, 78px);
@@ -1332,6 +1347,11 @@ h1, h2, h3, h4, h5, h6 {
     left: 32px;
   }
 
+  .hero-lockup-logo {
+    height: 38px;
+    max-height: 38px;
+  }
+
   .hero-lockup-wordmark {
     font-size: clamp(32px, 5.4vw, 50px);
   }
@@ -1339,6 +1359,11 @@ h1, h2, h3, h4, h5, h6 {
   .hero-lockup-tagline {
     font-size: 15px;
     margin-top: 12px;
+  }
+
+  .site-header-logo {
+    height: 38px;
+    max-height: 38px;
   }
 }
 
@@ -1369,6 +1394,11 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 60px; /* Space for hamburger menu */
   }
 
+  .hero-lockup-logo {
+    height: 32px;
+    max-height: 32px;
+  }
+
   .hero-lockup-wordmark {
     font-size: clamp(28px, 8vw, 42px);
   }
@@ -1385,6 +1415,11 @@ h1, h2, h3, h4, h5, h6 {
   .hero-lockup-cta {
     font-size: 14px;
     margin-top: 18px;
+  }
+
+  .site-header-logo {
+    height: 32px;
+    max-height: 32px;
   }
 
   /* Mobile: stack layout vertically */
@@ -1551,6 +1586,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-header-brand {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+
+/* Logo image in site header */
+.site-header-logo {
+  display: block;
+  height: 44px;
+  max-height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Text brand fallback */
+.site-header-brand-text {
   font-family: var(--font-display);
   font-size: 20px;
   font-weight: 500;
