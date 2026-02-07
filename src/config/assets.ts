@@ -16,22 +16,22 @@ export interface ImageAsset {
 // Using .mov from picandvideocontentforslideshow (Safari-compatible)
 // For Chrome/Firefox, falls back to static image
 export const HERO_VIDEO_SRC = '/picandvideocontentforslideshow/ScreenRecording_02-06-2026%2020-55-36_1.mov';
-export const HERO_FALLBACK_IMAGE = '/picandvideocontentforslideshow/slide-outdoor-2.jpg';
+export const HERO_FALLBACK_IMAGE = '/img/pexels/slide-outdoor-2.jpg';
 
 // ─── Brand Assets ──────────────────────────────────────────────────────
 export const LOGO_SRC = '/img/brand/honeydewlogo.png';
 
-// ─── Slideshow Images (from picandvideocontentforslideshow folder) ─────
+// ─── Slideshow Images (curated from img/pexels) ────────────────────────
 // Single source of truth - ordered list of slideshow items
 export const SLIDESHOW_IMAGES: ImageAsset[] = [
-  { src: '/picandvideocontentforslideshow/slide-family-1.jpg', alt: 'Family enjoying new home', orientation: 'horizontal', type: 'image' },
-  { src: '/picandvideocontentforslideshow/slide-family-2.jpg', alt: 'Family moment together', orientation: 'horizontal', type: 'image' },
-  { src: '/picandvideocontentforslideshow/slide-family-3.jpg', alt: 'Happy homeowners', orientation: 'horizontal', type: 'image' },
-  { src: '/picandvideocontentforslideshow/slide-home-1.jpg', alt: 'Beautiful home interior', orientation: 'horizontal', type: 'image' },
-  { src: '/picandvideocontentforslideshow/slide-outdoor-1.jpg', alt: 'Austin neighborhood', orientation: 'horizontal', type: 'image' },
-  { src: '/picandvideocontentforslideshow/slide-outdoor-2.jpg', alt: 'Texas landscape', orientation: 'horizontal', type: 'image' },
-  { src: '/picandvideocontentforslideshow/slide-work-1.png', alt: 'Make-ready in progress', orientation: 'horizontal', type: 'image' },
-  { src: '/picandvideocontentforslideshow/slide-work-2.png', alt: 'Completed project', orientation: 'horizontal', type: 'image' },
+  { src: '/img/pexels/slide-family-1.jpg', alt: 'Family enjoying new home', orientation: 'horizontal', type: 'image' },
+  { src: '/img/pexels/slide-family-2.jpg', alt: 'Family moment together', orientation: 'horizontal', type: 'image' },
+  { src: '/img/pexels/slide-family-3.jpg', alt: 'Happy homeowners', orientation: 'horizontal', type: 'image' },
+  { src: '/img/pexels/slide-home-1.jpg', alt: 'Beautiful home interior', orientation: 'horizontal', type: 'image' },
+  { src: '/img/pexels/slide-outdoor-1.jpg', alt: 'Austin neighborhood', orientation: 'horizontal', type: 'image' },
+  { src: '/img/pexels/slide-outdoor-2.jpg', alt: 'Texas landscape', orientation: 'horizontal', type: 'image' },
+  { src: '/img/pexels/slide-work-1.png', alt: 'Make-ready in progress', orientation: 'horizontal', type: 'image' },
+  { src: '/img/pexels/slide-work-2.png', alt: 'Completed project', orientation: 'horizontal', type: 'image' },
   { src: '/picandvideocontentforslideshow/couplefieldbw.png', alt: 'Couple in field', orientation: 'horizontal', type: 'image' },
 ];
 
