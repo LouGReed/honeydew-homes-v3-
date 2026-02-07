@@ -9,27 +9,30 @@ export interface ImageAsset {
   src: string;
   alt: string;
   orientation?: 'horizontal' | 'vertical';
+  type?: 'image' | 'video';
 }
 
 // ─── Hero Video ────────────────────────────────────────────────────────
 // Replace with actual .mp4/.webm when available
 // For now, falls back to a static image
 export const HERO_VIDEO_SRC = '/video/hero.mp4';
-export const HERO_FALLBACK_IMAGE = '/img/pexels/gallery-shuraeva-full.jpg';
+export const HERO_FALLBACK_IMAGE = '/picandvideocontentforslideshow/slide-outdoor-2.jpg';
 
 // ─── Brand Assets ──────────────────────────────────────────────────────
 export const LOGO_SRC = '/img/brand/honeydewlogo.png';
 
-// ─── Slideshow Images (curated, people-focused) ────────────────────────
+// ─── Slideshow Images (from picandvideocontentforslideshow folder) ─────
+// Single source of truth - ordered list of slideshow items
 export const SLIDESHOW_IMAGES: ImageAsset[] = [
-  { src: '/img/pexels/gallery-shuraeva.jpg', alt: 'Family settling into new home', orientation: 'horizontal' },
-  { src: '/img/pexels/gallery-abayev-5637755.jpg', alt: 'Moving day excitement', orientation: 'vertical' },
-  { src: '/img/pexels/gallery-abayev-5638605.jpg', alt: 'Home tour with family', orientation: 'horizontal' },
-  { src: '/img/pexels/gallery-karpovich.jpg', alt: 'Everyday home scene', orientation: 'horizontal' },
-  { src: '/img/pexels/gallery-lach-8657206.jpg', alt: 'Lifestyle moment at home', orientation: 'vertical' },
-  { src: '/img/pexels/gallery-lach-10044378.jpg', alt: 'Comfortable living space', orientation: 'horizontal' },
-  { src: '/img/pexels/gallery-lach-10397939.jpg', alt: 'Warm home interior', orientation: 'vertical' },
-  { src: '/img/pexels/gallery-ioanamtc-943.jpg', alt: 'Minimalist interior', orientation: 'horizontal' },
+  { src: '/picandvideocontentforslideshow/slide-family-1.jpg', alt: 'Family enjoying new home', orientation: 'horizontal', type: 'image' },
+  { src: '/picandvideocontentforslideshow/slide-family-2.jpg', alt: 'Family moment together', orientation: 'horizontal', type: 'image' },
+  { src: '/picandvideocontentforslideshow/slide-family-3.jpg', alt: 'Happy homeowners', orientation: 'horizontal', type: 'image' },
+  { src: '/picandvideocontentforslideshow/slide-home-1.jpg', alt: 'Beautiful home interior', orientation: 'horizontal', type: 'image' },
+  { src: '/picandvideocontentforslideshow/slide-outdoor-1.jpg', alt: 'Austin neighborhood', orientation: 'horizontal', type: 'image' },
+  { src: '/picandvideocontentforslideshow/slide-outdoor-2.jpg', alt: 'Texas landscape', orientation: 'horizontal', type: 'image' },
+  { src: '/picandvideocontentforslideshow/slide-work-1.png', alt: 'Make-ready in progress', orientation: 'horizontal', type: 'image' },
+  { src: '/picandvideocontentforslideshow/slide-work-2.png', alt: 'Completed project', orientation: 'horizontal', type: 'image' },
+  { src: '/picandvideocontentforslideshow/couplefieldbw.png', alt: 'Couple in field', orientation: 'horizontal', type: 'image' },
 ];
 
 // ─── About Page Images (editorial layout) ──────────────────────────────
