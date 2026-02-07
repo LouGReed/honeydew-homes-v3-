@@ -53,9 +53,12 @@ export function HeroVideo() {
       {/* Layer 6: Hero Lockup - Top Left */}
       <div className="hero-lockup">
         <h1 className="hero-lockup-wordmark">Honeydew Homes</h1>
-        <div className="hero-lockup-rule" />
-        <p className="hero-lockup-subline">Austin make-ready for realtors.</p>
-        <span className="hero-lockup-badge">Show-Ready</span>
+        <p className="hero-lockup-primary">
+          Preparing homes for market, the right way.
+        </p>
+        <p className="hero-lockup-secondary">
+          Working with Austin realtors to ensure listings photograph clean, show confidently, and move efficiently.
+        </p>
       </div>
 
       {/* Mobile Navigation */}
