@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { siteConfig, BOOK_URL } from '@/config/site';
 import { VideoRotator } from './VideoRotator';
-import { HeroSlideshow } from './HeroSlideshow';
 import { useState } from 'react';
 
 export function HeroVideo() {
@@ -20,7 +19,7 @@ export function HeroVideo() {
       {/* Layer 3: Film Grain Overlay */}
       <div className="hero-grain" />
 
-      {/* Layer 4-5: Content (slideshow, nav, logo, CTA) */}
+      {/* Layer 4: Content (nav, logo, CTA) */}
       <div className="hero-content">
         {/* Navigation - Top Right */}
         <nav className="hero-nav">
@@ -47,19 +46,11 @@ export function HeroVideo() {
           </button>
         </nav>
 
-        {/* Main hero layout: branding left, slideshow right */}
-        <div className="hero-main">
-          {/* Branding - Bottom Left */}
-          <div className="hero-branding">
-            <h1 className="hero-logo">Honeydew</h1>
-            <p className="hero-tagline">{siteConfig.tagline}</p>
-            <span className="hero-stamp">Show-Ready</span>
-          </div>
-
-          {/* Slideshow - Right Side */}
-          <div className="hero-slideshow-wrapper">
-            <HeroSlideshow />
-          </div>
+        {/* Branding - Bottom Left */}
+        <div className="hero-branding">
+          <h1 className="hero-logo">Honeydew</h1>
+          <p className="hero-tagline">{siteConfig.tagline}</p>
+          <span className="hero-stamp">Show-Ready</span>
         </div>
       </div>
 
