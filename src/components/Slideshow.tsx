@@ -7,7 +7,10 @@ const SLIDE_INTERVAL = 3000; // 3 seconds
 
 export function Slideshow() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [canAdvance, setCanAdvance] = useState(true);
+  const [canAdvance, setCanAdvance] = useState(false);
+
+  // Video readiness tracking
+  const [readyVideos, setReadyVideos] = useState<Set<string>>(new Set());
 
   // Video resume tracking
   const resumeTimesRef = useRef<Record<string, number>>({});
@@ -39,6 +42,15 @@ export function Slideshow() {
     console.log('ACTIVE GROUP', currentIndex, visibleImages.map(x => x.src));
   }, [currentIndex, visibleImages]);
 
+  // Mark video as ready
+  const markVideoReady = useCallback((src: string) => {
+    setReadyVideos((prev) => {
+      const next = new Set(prev);
+      next.add(src);
+      return next;
+    });
+  }, []);
+
   // Save video positions before leaving
   const saveVideoPositions = useCallback((slideItems: ImageAsset[]) => {
     slideItems.forEach((item) => {
@@ -52,6 +64,34 @@ export function Slideshow() {
     });
   }, []);
 
+  // Handle video canplay - apply resume time and start playing
+  const handleVideoCanPlay = useCallback((src: string) => {
+    const videoEl = videoRefsMap.current[src];
+    if (!videoEl) return;
+
+    // Check if this video is in the visible set
+    const isVisible = visibleImages.some((item) => item.src === src);
+    if (!isVisible) return;
+
+    // Get saved time or use tiny offset
+    const savedTime = resumeTimesRef.current[src] || 0;
+    const duration = videoEl.duration || Infinity;
+
+    // Apply resume time (clamped) or tiny offset
+    if (savedTime > 0) {
+      const resumeTime = Math.min(savedTime, Math.max(0, duration - 0.25));
+      videoEl.currentTime = resumeTime;
+    } else if (videoEl.currentTime === 0) {
+      videoEl.currentTime = 0.03;
+    }
+
+    // Mark as ready
+    markVideoReady(src);
+
+    // Play the video
+    videoEl.play().catch(() => {});
+  }, [visibleImages, markVideoReady]);
+
   // Advance to next slide group
   const goToNext = useCallback(() => {
     const currentItems = getVisibleImages();
@@ -62,30 +102,6 @@ export function Slideshow() {
     setCanAdvance(false);
     setCurrentIndex((i) => (i + 1) % totalSlides);
   }, [totalSlides, getVisibleImages, saveVideoPositions]);
-
-  // Handle videos becoming active (resume from saved position)
-  useEffect(() => {
-    visibleImages.forEach((item) => {
-      if (item.type === 'video') {
-        const videoEl = videoRefsMap.current[item.src];
-        if (!videoEl) return;
-
-        const savedTime = resumeTimesRef.current[item.src] || 0;
-        const duration = videoEl.duration || Infinity;
-
-        // Clamp to duration - 0.25s to avoid ending immediately
-        const resumeTime = Math.min(savedTime, Math.max(0, duration - 0.25));
-        videoEl.currentTime = resumeTime;
-
-        const playPromise = videoEl.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(() => {
-            // Autoplay blocked, that's ok
-          });
-        }
-      }
-    });
-  }, [currentIndex, visibleImages]);
 
   // Handle video ended - reset saved time
   const handleVideoEnded = useCallback((src: string) => {
@@ -100,16 +116,36 @@ export function Slideshow() {
 
     setCanAdvance(false);
 
-    minTimeoutRef.current = setTimeout(() => {
-      setCanAdvance(true);
-    }, SLIDE_INTERVAL);
+    const hasVideo = visibleImages.some((item) => item.type === 'video');
+
+    if (hasVideo) {
+      // Wait for all videos in current view to be ready
+      const checkReady = () => {
+        const allReady = visibleImages
+          .filter((item) => item.type === 'video')
+          .every((item) => readyVideos.has(item.src));
+
+        if (allReady) {
+          minTimeoutRef.current = setTimeout(() => {
+            setCanAdvance(true);
+          }, SLIDE_INTERVAL);
+        } else {
+          minTimeoutRef.current = setTimeout(checkReady, 100);
+        }
+      };
+      checkReady();
+    } else {
+      minTimeoutRef.current = setTimeout(() => {
+        setCanAdvance(true);
+      }, SLIDE_INTERVAL);
+    }
 
     return () => {
       if (minTimeoutRef.current) {
         clearTimeout(minTimeoutRef.current);
       }
     };
-  }, [currentIndex]);
+  }, [currentIndex, visibleImages, readyVideos]);
 
   // Auto-advance timer
   useEffect(() => {
@@ -135,9 +171,17 @@ export function Slideshow() {
     videoRefsMap.current[src] = el;
   }, []);
 
+  // Check if a video is ready to show
+  const isVideoReady = useCallback((src: string) => {
+    return readyVideos.has(src);
+  }, [readyVideos]);
+
   // Render media item (image or video)
   const renderMediaItem = (item: ImageAsset, loading: 'eager' | 'lazy' = 'lazy') => {
-    if (item.type === 'video') {
+    const isVideo = item.type === 'video';
+    const videoReady = isVideo ? isVideoReady(item.src) : true;
+
+    if (isVideo) {
       return (
         <video
           key={`video-${item.src}`}
@@ -146,9 +190,17 @@ export function Slideshow() {
           muted
           playsInline
           loop
-          preload="metadata"
+          preload="auto"
+          onCanPlay={() => handleVideoCanPlay(item.src)}
           onEnded={() => handleVideoEnded(item.src)}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            opacity: videoReady ? 1 : 0,
+            transition: 'opacity 0.3s ease-in-out',
+          }}
         />
       );
     }
@@ -158,6 +210,12 @@ export function Slideshow() {
         src={item.src}
         alt={item.alt}
         loading={loading}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center',
+        }}
       />
     );
   };

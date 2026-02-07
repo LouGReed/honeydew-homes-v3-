@@ -10,11 +10,13 @@ export function HeroSlideshow() {
   const [isPaused, setIsPaused] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [canAdvance, setCanAdvance] = useState(true);
+  const [canAdvance, setCanAdvance] = useState(false);
+
+  // Video readiness tracking
+  const [readyVideos, setReadyVideos] = useState<Set<string>>(new Set());
 
   // Video resume tracking
   const resumeTimesRef = useRef<Record<string, number>>({});
-  const activatedAtRef = useRef<number>(Date.now());
   const videoRefsMap = useRef<Record<string, HTMLVideoElement | null>>({});
   const advanceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const minTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -40,6 +42,15 @@ export function HeroSlideshow() {
     console.log('ACTIVE', activeIndex, items[activeIndex]?.src);
   }, [activeIndex, items]);
 
+  // Mark video as ready
+  const markVideoReady = useCallback((src: string) => {
+    setReadyVideos((prev) => {
+      const next = new Set(prev);
+      next.add(src);
+      return next;
+    });
+  }, []);
+
   // Save video position before leaving
   const saveVideoPosition = useCallback((item: ImageAsset) => {
     if (item.type === 'video') {
@@ -51,6 +62,35 @@ export function HeroSlideshow() {
     }
   }, []);
 
+  // Handle video canplay - apply resume time and start playing
+  const handleVideoCanPlay = useCallback((src: string) => {
+    const videoEl = videoRefsMap.current[src];
+    if (!videoEl) return;
+
+    // Check if this video is the active one
+    const activeItem = items[activeIndex];
+    if (activeItem?.src !== src) return;
+
+    // Get saved time or use tiny offset
+    const savedTime = resumeTimesRef.current[src] || 0;
+    const duration = videoEl.duration || Infinity;
+
+    // Apply resume time (clamped) or tiny offset
+    if (savedTime > 0) {
+      const resumeTime = Math.min(savedTime, Math.max(0, duration - 0.25));
+      videoEl.currentTime = resumeTime;
+    } else if (videoEl.currentTime === 0) {
+      // Tiny offset to avoid black frame / decoder glitch
+      videoEl.currentTime = 0.03;
+    }
+
+    // Mark as ready
+    markVideoReady(src);
+
+    // Play the video
+    videoEl.play().catch(() => {});
+  }, [items, activeIndex, markVideoReady]);
+
   // Advance to next slide
   const goToNext = useCallback(() => {
     if (isTransitioning) return;
@@ -59,7 +99,6 @@ export function HeroSlideshow() {
 
     // Check if we need to wait for minimum 3 seconds on video
     if (current?.type === 'video' && !canAdvance) {
-      // Wait for canAdvance to become true
       return;
     }
 
@@ -72,7 +111,6 @@ export function HeroSlideshow() {
     setCanAdvance(false);
 
     setActiveIndex((i) => (i + 1) % totalSlides);
-    activatedAtRef.current = Date.now();
 
     setTimeout(() => setIsTransitioning(false), 600);
   }, [activeIndex, totalSlides, isTransitioning, saveVideoPosition, canAdvance, items]);
@@ -90,7 +128,6 @@ export function HeroSlideshow() {
     setCanAdvance(false);
 
     setActiveIndex((i) => (i - 1 + totalSlides) % totalSlides);
-    activatedAtRef.current = Date.now();
 
     setTimeout(() => setIsTransitioning(false), 600);
   }, [activeIndex, totalSlides, isTransitioning, saveVideoPosition, items]);
@@ -108,33 +145,9 @@ export function HeroSlideshow() {
     setCanAdvance(false);
 
     setActiveIndex(index);
-    activatedAtRef.current = Date.now();
 
     setTimeout(() => setIsTransitioning(false), 600);
   }, [activeIndex, isTransitioning, saveVideoPosition, items]);
-
-  // Handle video becoming active (resume from saved position)
-  useEffect(() => {
-    if (!isCurrentVideo || !currentItem) return;
-
-    const videoEl = videoRefsMap.current[currentItem.src];
-    if (!videoEl) return;
-
-    const savedTime = resumeTimesRef.current[currentItem.src] || 0;
-    const duration = videoEl.duration || Infinity;
-
-    // Clamp to duration - 0.25s to avoid ending immediately
-    const resumeTime = Math.min(savedTime, Math.max(0, duration - 0.25));
-    videoEl.currentTime = resumeTime;
-
-    // Play the video
-    const playPromise = videoEl.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Autoplay blocked, that's ok
-      });
-    }
-  }, [activeIndex, isCurrentVideo, currentItem]);
 
   // Handle video ended - reset saved time
   const handleVideoEnded = useCallback((src: string) => {
@@ -142,26 +155,44 @@ export function HeroSlideshow() {
   }, []);
 
   // Minimum 3-second timer before allowing advance
+  // For videos: start timer only when video is ready
+  // For images: start timer immediately
   useEffect(() => {
-    // Clear previous timer
     if (minTimeoutRef.current) {
       clearTimeout(minTimeoutRef.current);
     }
 
-    // Set canAdvance to false initially
     setCanAdvance(false);
 
-    // After 3 seconds, allow advance
-    minTimeoutRef.current = setTimeout(() => {
-      setCanAdvance(true);
-    }, SLIDE_INTERVAL);
+    const current = items[activeIndex];
+    const isVideo = current?.type === 'video';
+
+    if (isVideo) {
+      // For videos, wait until ready before starting timer
+      const checkReady = () => {
+        if (readyVideos.has(current.src)) {
+          minTimeoutRef.current = setTimeout(() => {
+            setCanAdvance(true);
+          }, SLIDE_INTERVAL);
+        } else {
+          // Check again shortly
+          minTimeoutRef.current = setTimeout(checkReady, 100);
+        }
+      };
+      checkReady();
+    } else {
+      // For images, start timer immediately
+      minTimeoutRef.current = setTimeout(() => {
+        setCanAdvance(true);
+      }, SLIDE_INTERVAL);
+    }
 
     return () => {
       if (minTimeoutRef.current) {
         clearTimeout(minTimeoutRef.current);
       }
     };
-  }, [activeIndex]);
+  }, [activeIndex, items, readyVideos]);
 
   // Auto-advance timer
   useEffect(() => {
@@ -169,15 +200,13 @@ export function HeroSlideshow() {
       return;
     }
 
-    // Clear any existing timeout
     if (advanceTimeoutRef.current) {
       clearTimeout(advanceTimeoutRef.current);
     }
 
-    // Set up advance timer - advance immediately since canAdvance is true
     advanceTimeoutRef.current = setTimeout(() => {
       goToNext();
-    }, 100); // Small delay to ensure state is settled
+    }, 100);
 
     return () => {
       if (advanceTimeoutRef.current) {
@@ -211,6 +240,11 @@ export function HeroSlideshow() {
     videoRefsMap.current[src] = el;
   }, []);
 
+  // Check if a video is ready to show
+  const isVideoReady = useCallback((src: string) => {
+    return readyVideos.has(src);
+  }, [readyVideos]);
+
   return (
     <div
       className="hero-slideshow"
@@ -222,33 +256,56 @@ export function HeroSlideshow() {
       {/* Slideshow frame */}
       <div className="hero-slideshow-frame">
         {/* Media items with crossfade */}
-        {items.map((item, index) => (
-          <div
-            key={`slide-${item.src}`}
-            className={`hero-slideshow-slide ${index === activeIndex ? 'active' : ''}`}
-          >
-            {item.type === 'video' ? (
-              <video
-                key={`video-${item.src}`}
-                ref={(el) => setVideoRef(item.src, el)}
-                src={item.src}
-                muted
-                playsInline
-                loop
-                preload="metadata"
-                onEnded={() => handleVideoEnded(item.src)}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            ) : (
-              <img
-                key={`img-${item.src}`}
-                src={item.src}
-                alt={item.alt}
-                loading={index === 0 ? 'eager' : 'lazy'}
-              />
-            )}
-          </div>
-        ))}
+        {items.map((item, index) => {
+          const isActive = index === activeIndex;
+          const isVideo = item.type === 'video';
+          const videoReady = isVideo ? isVideoReady(item.src) : true;
+
+          return (
+            <div
+              key={`slide-${item.src}`}
+              className={`hero-slideshow-slide ${isActive ? 'active' : ''}`}
+              style={{
+                // For videos: only show when ready to avoid jerk
+                opacity: isActive ? (videoReady ? 1 : 0) : 0,
+                transition: 'opacity 0.6s ease-in-out',
+              }}
+            >
+              {isVideo ? (
+                <video
+                  key={`video-${item.src}`}
+                  ref={(el) => setVideoRef(item.src, el)}
+                  src={item.src}
+                  muted
+                  playsInline
+                  loop
+                  preload="auto"
+                  onCanPlay={() => handleVideoCanPlay(item.src)}
+                  onEnded={() => handleVideoEnded(item.src)}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
+                />
+              ) : (
+                <img
+                  key={`img-${item.src}`}
+                  src={item.src}
+                  alt={item.alt}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {/* Caption */}
