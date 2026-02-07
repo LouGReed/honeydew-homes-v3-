@@ -22,7 +22,7 @@ export function HeroVideo() {
       {/* Layer 4: Film Grain + Vignette Overlay */}
       <div className="hero-grain" />
 
-      {/* Layer 5: Content (nav, logo, CTA) */}
+      {/* Layer 5: Content */}
       <div className="hero-content">
         {/* Navigation - Top Right */}
         <nav className="hero-nav">
@@ -48,13 +48,13 @@ export function HeroVideo() {
             <span />
           </button>
         </nav>
+      </div>
 
-        {/* Branding - Bottom Left */}
-        <div className="hero-branding">
-          <h1 className="hero-logo">Honeydew</h1>
-          <p className="hero-tagline">{siteConfig.tagline}</p>
-          <span className="hero-stamp">Show-Ready</span>
-        </div>
+      {/* Layer 6: Hero Lockup - Top Left */}
+      <div className="hero-lockup">
+        <h1 className="hero-lockup-wordmark">Honeydew</h1>
+        <p className="hero-lockup-tagline">{siteConfig.tagline}</p>
+        <span className="hero-lockup-stamp">Show-Ready</span>
       </div>
 
       {/* Mobile Navigation */}
