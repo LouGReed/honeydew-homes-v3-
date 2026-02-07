@@ -5,6 +5,8 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+  basePath: '/honeydew-homes-v3-',
+  assetPrefix: '/honeydew-homes-v3-',
 };
 
 module.exports = nextConfig;
