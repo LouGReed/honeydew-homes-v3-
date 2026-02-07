@@ -112,11 +112,37 @@ export default function AboutPage() {
       {/* Validation */}
       <section className="about-validation-section">
         <div className="container">
-          <p className="about-validation-label">Trusted by</p>
-          <div className="about-validation-logos">
-            <img src="/img/validation/compass.png" alt="Compass" />
-            <img src="/img/validation/sicara.PNG" alt="Sicara" />
-            <img src="/img/validation/texas-realtors.png" alt="Texas Realtors" />
+          <div className="about-validation-content">
+            <p className="about-validation-eyebrow">Trusted Partners</p>
+            <h2 className="about-validation-headline">
+              Austin's leading brokerages trust Honeydew
+            </h2>
+            <div className="about-validation-logos">
+              <a
+                href="https://www.compass.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="about-validation-logo-link"
+              >
+                <img src="/img/validation/compass.png" alt="Compass" />
+              </a>
+              <a
+                href="https://www.sicaradesign.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="about-validation-logo-link"
+              >
+                <img src="/img/validation/sicara.PNG" alt="Sicara Design" />
+              </a>
+              <a
+                href="https://www.texasrealtors.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="about-validation-logo-link"
+              >
+                <img src="/img/validation/texas-realtors.png" alt="Texas Realtors" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
