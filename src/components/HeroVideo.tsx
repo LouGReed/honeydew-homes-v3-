@@ -2,41 +2,25 @@
 
 import Link from 'next/link';
 import { siteConfig, BOOK_URL } from '@/config/site';
-import { HERO_VIDEO_SRC, HERO_FALLBACK_IMAGE } from '@/config/assets';
+import { VideoRotator } from './VideoRotator';
 import { HeroSlideshow } from './HeroSlideshow';
 import { useState } from 'react';
 
 export function HeroVideo() {
-  const [videoError, setVideoError] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <section className="hero hero-fixed">
-      {/* Background Video or Fallback Image */}
-      {!videoError ? (
-        <video
-          className="hero-media"
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster={HERO_FALLBACK_IMAGE}
-          onError={() => setVideoError(true)}
-        >
-          <source src={HERO_VIDEO_SRC} type="video/mp4" />
-        </video>
-      ) : (
-        <img
-          className="hero-media"
-          src={HERO_FALLBACK_IMAGE}
-          alt="Austin home interior"
-        />
-      )}
+      {/* Layer 1: Background Rotating Videos */}
+      <VideoRotator />
 
-      {/* Gradient Overlay */}
+      {/* Layer 2: Dark Gradient Overlay for legibility */}
       <div className="hero-overlay" />
 
-      {/* Content */}
+      {/* Layer 3: Film Grain Overlay */}
+      <div className="hero-grain" />
+
+      {/* Layer 4-5: Content (slideshow, nav, logo, CTA) */}
       <div className="hero-content">
         {/* Navigation - Top Right */}
         <nav className="hero-nav">
