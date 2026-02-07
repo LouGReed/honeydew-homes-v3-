@@ -5,6 +5,8 @@
  * All paths are relative to /public.
  */
 
+import { ASSET_PREFIX } from './site';
+
 export interface ImageAsset {
   src: string;
   alt: string;
@@ -15,52 +17,52 @@ export interface ImageAsset {
 // ─── Background Videos (rotating hero) ─────────────────────────────────
 // MP4 files for cross-browser support (H.264)
 export const BACKGROUND_VIDEOS: string[] = [
-  '/picandvideocontentforslideshow/video-1.mp4',
-  '/picandvideocontentforslideshow/video-4.mp4',
-  '/picandvideocontentforslideshow/video-2.mp4',
-  '/picandvideocontentforslideshow/video-3.mp4',
+  `${ASSET_PREFIX}/picandvideocontentforslideshow/video-1.mp4`,
+  `${ASSET_PREFIX}/picandvideocontentforslideshow/video-4.mp4`,
+  `${ASSET_PREFIX}/picandvideocontentforslideshow/video-2.mp4`,
+  `${ASSET_PREFIX}/picandvideocontentforslideshow/video-3.mp4`,
 ];
 
-export const HERO_FALLBACK_IMAGE = '/picandvideocontentforslideshow/hero-poster.jpg';
+export const HERO_FALLBACK_IMAGE = `${ASSET_PREFIX}/picandvideocontentforslideshow/hero-poster.jpg`;
 
 // Video rotation settings
 export const VIDEO_ROTATION_INTERVAL = 5000; // 5 seconds
 export const VIDEO_CROSSFADE_DURATION = 800; // 800ms crossfade
 
 // ─── Brand Assets ──────────────────────────────────────────────────────
-export const LOGO_SRC = '/img/brand/honeydewlogo.png';
+export const LOGO_SRC = `${ASSET_PREFIX}/img/brand/honeydewlogo.png`;
 
 // ─── Slideshow Items (mixed media: images + videos) ────────────────────
 // Single source of truth - ordered list of slideshow items
 // Only existing video files: video-1.mp4 and video-4.mp4
 export const SLIDESHOW_IMAGES: ImageAsset[] = [
-  { src: '/picandvideocontentforslideshow/video-1.mp4', alt: 'Austin property showcase', orientation: 'horizontal', type: 'video' },
-  { src: '/img/pexels/slide-family-1.jpg', alt: 'Family enjoying new home', orientation: 'horizontal', type: 'image' },
-  { src: '/picandvideocontentforslideshow/video-4.mp4', alt: 'Home walkthrough', orientation: 'horizontal', type: 'video' },
-  { src: '/img/pexels/slide-family-2.jpg', alt: 'Family moment together', orientation: 'horizontal', type: 'image' },
-  { src: '/img/pexels/slide-home-1.jpg', alt: 'Beautiful home interior', orientation: 'horizontal', type: 'image' },
-  { src: '/img/pexels/slide-outdoor-1.jpg', alt: 'Austin neighborhood', orientation: 'horizontal', type: 'image' },
-  { src: '/picandvideocontentforslideshow/couplefieldbw.png', alt: 'Couple in field', orientation: 'horizontal', type: 'image' },
+  { src: `${ASSET_PREFIX}/picandvideocontentforslideshow/video-1.mp4`, alt: 'Austin property showcase', orientation: 'horizontal', type: 'video' },
+  { src: `${ASSET_PREFIX}/img/pexels/slide-family-1.jpg`, alt: 'Family enjoying new home', orientation: 'horizontal', type: 'image' },
+  { src: `${ASSET_PREFIX}/picandvideocontentforslideshow/video-4.mp4`, alt: 'Home walkthrough', orientation: 'horizontal', type: 'video' },
+  { src: `${ASSET_PREFIX}/img/pexels/slide-family-2.jpg`, alt: 'Family moment together', orientation: 'horizontal', type: 'image' },
+  { src: `${ASSET_PREFIX}/img/pexels/slide-home-1.jpg`, alt: 'Beautiful home interior', orientation: 'horizontal', type: 'image' },
+  { src: `${ASSET_PREFIX}/img/pexels/slide-outdoor-1.jpg`, alt: 'Austin neighborhood', orientation: 'horizontal', type: 'image' },
+  { src: `${ASSET_PREFIX}/picandvideocontentforslideshow/couplefieldbw.png`, alt: 'Couple in field', orientation: 'horizontal', type: 'image' },
 ];
 
 // ─── About Page Images (editorial layout) ──────────────────────────────
 export const ABOUT_IMAGES: ImageAsset[] = [
-  { src: '/img/pexels/gallery-shuraeva-full.jpg', alt: 'Family in sunlit home', orientation: 'horizontal' },
-  { src: '/img/pexels/gallery-abayev-5637755-full.jpg', alt: 'New homeowners', orientation: 'vertical' },
-  { src: '/img/pexels/gallery-karpovich-full.jpg', alt: 'Home life moment', orientation: 'horizontal' },
-  { src: '/img/pexels/gallery-lach-10044378-full.jpg', alt: 'Living room lifestyle', orientation: 'horizontal' },
-  { src: '/img/pexels/gallery-ioanamtc-079-full.jpg', alt: 'Modern interior', orientation: 'vertical' },
+  { src: `${ASSET_PREFIX}/img/pexels/gallery-shuraeva-full.jpg`, alt: 'Family in sunlit home', orientation: 'horizontal' },
+  { src: `${ASSET_PREFIX}/img/pexels/gallery-abayev-5637755-full.jpg`, alt: 'New homeowners', orientation: 'vertical' },
+  { src: `${ASSET_PREFIX}/img/pexels/gallery-karpovich-full.jpg`, alt: 'Home life moment', orientation: 'horizontal' },
+  { src: `${ASSET_PREFIX}/img/pexels/gallery-lach-10044378-full.jpg`, alt: 'Living room lifestyle', orientation: 'horizontal' },
+  { src: `${ASSET_PREFIX}/img/pexels/gallery-ioanamtc-079-full.jpg`, alt: 'Modern interior', orientation: 'vertical' },
 ];
 
 // ─── Services Page Images ──────────────────────────────────────────────
 export const SERVICES_IMAGES: ImageAsset[] = [
-  { src: '/img/pexels/gallery-ioanamtc-943.jpg', alt: 'Clean interior', orientation: 'horizontal' },
-  { src: '/img/pexels/gallery-ioanamtc-079.jpg', alt: 'Modern space', orientation: 'horizontal' },
-  { src: '/img/pexels/gallery-lach-8657206.jpg', alt: 'Home detail', orientation: 'vertical' },
+  { src: `${ASSET_PREFIX}/img/pexels/gallery-ioanamtc-943.jpg`, alt: 'Clean interior', orientation: 'horizontal' },
+  { src: `${ASSET_PREFIX}/img/pexels/gallery-ioanamtc-079.jpg`, alt: 'Modern space', orientation: 'horizontal' },
+  { src: `${ASSET_PREFIX}/img/pexels/gallery-lach-8657206.jpg`, alt: 'Home detail', orientation: 'vertical' },
 ];
 
 // ─── Validation Logos ──────────────────────────────────────────────────
 export const VALIDATION_LOGOS = [
-  { src: '/img/validation/compass.png', alt: 'Compass', href: 'https://www.compass.com/' },
-  { src: '/img/validation/texas-realtors.png', alt: 'Texas Realtors', href: 'https://www.texasrealestate.com/' },
+  { src: `${ASSET_PREFIX}/img/validation/compass.png`, alt: 'Compass', href: 'https://www.compass.com/' },
+  { src: `${ASSET_PREFIX}/img/validation/texas-realtors.png`, alt: 'Texas Realtors', href: 'https://www.texasrealestate.com/' },
 ];

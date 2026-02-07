@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { SiteHeader, SiteFooter } from '@/components';
-import { siteConfig, BOOK_URL } from '@/config/site';
+import { siteConfig, BOOK_URL, ASSET_PREFIX } from '@/config/site';
 
 export default function AboutPage() {
   return (
@@ -19,7 +19,7 @@ export default function AboutPage() {
           <div className="about-texas-map-container">
             <div className="about-texas-map-wrapper">
               <img
-                src="/texasmap/IMG_1452.PNG"
+                src={`${ASSET_PREFIX}/texasmap/IMG_1452.PNG`}
                 alt="Texas state map"
                 className="about-texas-map-image"
               />
@@ -124,7 +124,7 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className="about-validation-logo-link"
               >
-                <img src="/img/validation/compass.png" alt="Compass" />
+                <img src={`${ASSET_PREFIX}/img/validation/compass.png`} alt="Compass" />
               </a>
               <a
                 href="https://www.sicaradesign.com"
@@ -132,7 +132,7 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className="about-validation-logo-link"
               >
-                <img src="/img/validation/sicara.PNG" alt="Sicara Design" />
+                <img src={`${ASSET_PREFIX}/img/validation/sicara.PNG`} alt="Sicara Design" />
               </a>
               <a
                 href="https://www.texasrealestate.com"
@@ -140,7 +140,7 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className="about-validation-logo-link"
               >
-                <img src="/img/validation/texas-realtors.png" alt="Texas Realtors" />
+                <img src={`${ASSET_PREFIX}/img/validation/texas-realtors.png`} alt="Texas Realtors" />
               </a>
             </div>
           </div>

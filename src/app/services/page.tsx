@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { SiteHeader, SiteFooter } from '@/components';
-import { siteConfig, BOOK_URL } from '@/config/site';
+import { siteConfig, BOOK_URL, ASSET_PREFIX } from '@/config/site';
 
 export default function ServicesPage() {
   return (
@@ -38,7 +38,7 @@ export default function ServicesPage() {
       <section className="editorial-image-asymmetric">
         <div className="editorial-image-asymmetric-left">
           <img
-            src="/img/pexels/gallery-lach-10397939-full.jpg"
+            src={`${ASSET_PREFIX}/img/pexels/gallery-lach-10397939-full.jpg`}
             alt="Interior work"
             loading="lazy"
           />
@@ -66,7 +66,7 @@ export default function ServicesPage() {
       <section className="editorial-image-asymmetric">
         <div className="editorial-image-asymmetric-right">
           <img
-            src="/img/pexels/gallery-lach-8657206-full.jpg"
+            src={`${ASSET_PREFIX}/img/pexels/gallery-lach-8657206-full.jpg`}
             alt="Exterior work"
             loading="lazy"
           />
@@ -124,7 +124,7 @@ export default function ServicesPage() {
       {/* Quiet Lifestyle Image - Before CTA */}
       <section className="editorial-image-quiet">
         <img
-          src="/img/pexels/slide-family-3.jpg"
+          src={`${ASSET_PREFIX}/img/pexels/slide-family-3.jpg`}
           alt="Austin family home"
           loading="lazy"
           className="editorial-image-mono"

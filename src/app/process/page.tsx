@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { SiteHeader, SiteFooter } from '@/components';
-import { siteConfig, BOOK_URL } from '@/config/site';
+import { siteConfig, BOOK_URL, ASSET_PREFIX } from '@/config/site';
 
 export default function ProcessPage() {
   return (
@@ -37,7 +37,7 @@ export default function ProcessPage() {
       {/* Work Image Band */}
       <section className="editorial-image-band-wide">
         <img
-          src="/img/pexels/slide-work-1.png"
+          src={`${ASSET_PREFIX}/img/pexels/slide-work-1.png`}
           alt="Work in progress"
           loading="lazy"
           className="editorial-image-wide"
@@ -81,7 +81,7 @@ export default function ProcessPage() {
       {/* Work Image Band */}
       <section className="editorial-image-band-wide">
         <img
-          src="/img/pexels/slide-work-2.png"
+          src={`${ASSET_PREFIX}/img/pexels/slide-work-2.png`}
           alt="Completed work"
           loading="lazy"
           className="editorial-image-wide"
@@ -146,7 +146,7 @@ export default function ProcessPage() {
       {/* Quiet Lifestyle Image - Before CTA */}
       <section className="editorial-image-quiet">
         <img
-          src="/img/pexels/slide-home-1.jpg"
+          src={`${ASSET_PREFIX}/img/pexels/slide-home-1.jpg`}
           alt="Austin home"
           loading="lazy"
           className="editorial-image-mono"

@@ -13,7 +13,7 @@
 
 @font-face {
   font-family: 'Montreal';
-  src: url('/fonts/montreal/Montreal-Regular.ttf') format('truetype');
+  src: url('/honeydew-homes-v3-/fonts/montreal/Montreal-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -21,7 +21,7 @@
 
 @font-face {
   font-family: 'Montreal';
-  src: url('/fonts/montreal/Montreal-Bold.ttf') format('truetype');
+  src: url('/honeydew-homes-v3-/fonts/montreal/Montreal-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -29,7 +29,7 @@
 
 @font-face {
   font-family: 'Canela';
-  src: url('/fonts/canela/Canela-Regular-Trial.otf') format('opentype');
+  src: url('/honeydew-homes-v3-/fonts/canela/Canela-Regular-Trial.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -37,7 +37,7 @@
 
 @font-face {
   font-family: 'Canela';
-  src: url('/fonts/canela/Canela-Medium-Trial.otf') format('opentype');
+  src: url('/honeydew-homes-v3-/fonts/canela/Canela-Medium-Trial.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -45,7 +45,7 @@
 
 @font-face {
   font-family: 'Canela';
-  src: url('/fonts/canela/Canela-Bold-Trial.otf') format('opentype');
+  src: url('/honeydew-homes-v3-/fonts/canela/Canela-Bold-Trial.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
