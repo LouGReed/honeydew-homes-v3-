@@ -8,7 +8,7 @@ export function ServicesGrid() {
           <h2 className="services-title">What We Do</h2>
         </header>
         <div className="services-grid">
-          {siteConfig.services.map((service, index) => (
+          {siteConfig.coreServices.map((service, index) => (
             <article key={index} className="service-card">
               <h3 className="service-card-title">{service.title}</h3>
               <p className="service-card-description">{service.description}</p>
