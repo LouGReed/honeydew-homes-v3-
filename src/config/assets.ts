@@ -12,11 +12,21 @@ export interface ImageAsset {
   type?: 'image' | 'video';
 }
 
-// ─── Hero Video ────────────────────────────────────────────────────────
-// Using .mov from picandvideocontentforslideshow (Safari-compatible)
-// For Chrome/Firefox, falls back to static image
-export const HERO_VIDEO_SRC = '/picandvideocontentforslideshow/ScreenRecording_02-06-2026%2020-55-36_1.mov';
+// ─── Background Videos (rotating hero) ─────────────────────────────────
+// .mov files from picandvideocontentforslideshow (Safari-compatible)
+// For Chrome/Firefox, falls back to static image rotation
+export const BACKGROUND_VIDEOS: string[] = [
+  '/picandvideocontentforslideshow/ScreenRecording_02-06-2026%2020-55-36_1.mov',
+  '/picandvideocontentforslideshow/ScreenRecording_02-06-2026%2020-58-56_1.mov',
+  '/picandvideocontentforslideshow/ScreenRecording_02-06-2026%2021-01-57_1.mov',
+  '/picandvideocontentforslideshow/ScreenRecording_02-06-2026%2021-33-42_1.mov',
+];
+
 export const HERO_FALLBACK_IMAGE = '/img/pexels/slide-outdoor-2.jpg';
+
+// Video rotation settings
+export const VIDEO_ROTATION_INTERVAL = 5000; // 5 seconds
+export const VIDEO_CROSSFADE_DURATION = 800; // 800ms crossfade
 
 // ─── Brand Assets ──────────────────────────────────────────────────────
 export const LOGO_SRC = '/img/brand/honeydewlogo.png';
