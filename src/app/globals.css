@@ -538,7 +538,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.55;
   letter-spacing: 0.01em;
   line-height: 1.4;
-  margin: 8px 0 0 0;
+  margin: 8px 0 0 3px; /* 3px left for optical alignment with all-caps headline */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
