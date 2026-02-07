@@ -106,7 +106,7 @@ export const siteConfig = {
     },
     {
       question: 'Do you work with occupied homes?',
-      answer: 'Yes. We coordinate access with tenants and keep work areas clean. We've done hundreds of occupied turnovers.',
+      answer: 'Yes. We coordinate access with tenants and keep work areas clean. We have done hundreds of occupied turnovers.',
     },
     {
       question: 'How do payments work?',
@@ -117,7 +117,7 @@ export const siteConfig = {
       answer: 'We can provide rough ballparks, but accurate estimates require a walkthrough. Too many surprises in photos.',
     },
     {
-      question: 'What's your service area?',
+      question: 'What is your service area?',
       answer: 'Austin, Round Rock, Cedar Park, Georgetown, Pflugerville, Lakeway, Bee Cave, and surrounding areas.',
     },
     {
@@ -130,7 +130,7 @@ export const siteConfig = {
     },
     {
       question: 'What if something comes up mid-project?',
-      answer: 'We'll call you immediately with options and pricing. No work happens without your approval.',
+      answer: 'We will call you immediately with options and pricing. No work happens without your approval.',
     },
   ],
 
@@ -143,7 +143,7 @@ export const siteConfig = {
 
   // Values (short statements)
   values: [
-    { title: 'Clear scopes', description: 'You'll know exactly what we're doing and what it costs.' },
+    { title: 'Clear scopes', description: 'You will know exactly what we are doing and what it costs.' },
     { title: 'Fast turnarounds', description: 'We understand realtor timelines. We hit them.' },
     { title: 'Jobsite respect', description: 'Clean work areas. Professional crews. No excuses.' },
   ],
