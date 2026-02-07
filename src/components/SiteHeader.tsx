@@ -1,9 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { siteConfig, BOOK_URL, ASSET_PREFIX } from '@/config/site';
+import { siteConfig, BOOK_URL } from '@/config/site';
 
 interface SiteHeaderProps {
   variant?: 'transparent' | 'solid';
@@ -34,14 +33,7 @@ export function SiteHeader({ variant = 'transparent' }: SiteHeaderProps) {
         <div className="container">
           <div className="site-header-inner">
             <Link href="/" className="site-header-brand">
-              <Image
-                src={`${ASSET_PREFIX}/img/brand/honeydewlogo.png`}
-                alt="Honeydew Homes"
-                width={280}
-                height={56}
-                priority
-                className="site-header-logo"
-              />
+              Honeydew Homes
             </Link>
 
             <nav className="site-header-nav">

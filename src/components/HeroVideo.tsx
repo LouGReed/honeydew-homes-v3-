@@ -1,41 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { siteConfig, BOOK_URL, ASSET_PREFIX } from '@/config/site';
 import { VideoRotator } from './VideoRotator';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export function HeroVideo() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Lock scroll on landing page and set viewport height for Safari
-  useEffect(() => {
-    // Store original overflow
-    const originalOverflow = document.body.style.overflow;
-
-    // Lock scroll
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
-
-    // Set --vh for Safari viewport height fix
-    const setVh = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-
-    setVh();
-    window.addEventListener('resize', setVh);
-    window.addEventListener('orientationchange', setVh);
-
-    // Cleanup on unmount
-    return () => {
-      document.body.style.overflow = originalOverflow;
-      document.documentElement.style.overflow = '';
-      window.removeEventListener('resize', setVh);
-      window.removeEventListener('orientationchange', setVh);
-    };
-  }, []);
 
   return (
     <section className="hero hero-fixed">
@@ -81,28 +52,14 @@ export function HeroVideo() {
 
       {/* Layer 6: Hero Lockup - Top Left */}
       <div className="hero-lockup">
-        <Link href="/" className="hero-lockup-logo-link">
-          <Image
-            src={`${ASSET_PREFIX}/img/brand/honeydewlogo.png`}
-            alt="Honeydew Homes"
-            width={400}
-            height={80}
-            priority
-            className="hero-lockup-logo"
-          />
-        </Link>
+        <h1 className="hero-lockup-wordmark">Honeydew Homes</h1>
         <p className="hero-lockup-tagline">
-          Make-ready construction in Austin.<br />
-          Done before the Texas sun sets.
+          Make-ready construction in Austin. Done before the Texas sun sets.
         </p>
-        {/* Desktop CTA - hidden on mobile */}
-        <Link href={BOOK_URL} className="hero-lockup-cta hero-cta-desktop" target="_blank" rel="noopener noreferrer">
-          Book a walkthrough →
-        </Link>
       </div>
 
-      {/* Layer 7: Mobile CTA - Bottom Left (thumb-friendly) */}
-      <Link href={BOOK_URL} className="hero-cta-mobile" target="_blank" rel="noopener noreferrer">
+      {/* Layer 7: CTA - Bottom Left */}
+      <Link href={BOOK_URL} className="hero-cta-bottom" target="_blank" rel="noopener noreferrer">
         Book a walkthrough →
       </Link>
 
