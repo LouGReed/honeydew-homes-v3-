@@ -96,6 +96,16 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Full-bleed Image Break */}
+      <div
+        className="about-image-break"
+        style={{
+          backgroundImage: `url(${ASSET_PREFIX}/img/pexels/gallery-abayev-5638605-full.jpg)`,
+        }}
+        role="img"
+        aria-label="Construction work in progress"
+      />
+
       {/* Credentials */}
       <section className="about-credentials-section">
         <div className="container">
