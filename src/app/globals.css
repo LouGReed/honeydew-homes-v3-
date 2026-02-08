@@ -1533,7 +1533,7 @@ h1, h2, h3, h4, h5, h6 {
     white-space: nowrap;
   }
 
-  /* Tagline: 2 lines on mobile */
+  /* Tagline: exactly 2 lines on mobile, no additional wrapping */
   .hero-lockup-tagline {
     font-size: 14px;
     font-weight: 400;
@@ -1541,6 +1541,13 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.5;
     margin-top: 10px;
     max-width: 100%;
+  }
+
+  /* Each tagline line: no wrap to ensure exactly 2 lines */
+  .tagline-line-1,
+  .tagline-line-2 {
+    white-space: nowrap;
+    display: inline;
   }
 
   /* Show the line break on mobile */
