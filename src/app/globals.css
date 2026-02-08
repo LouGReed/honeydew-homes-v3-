@@ -1518,14 +1518,14 @@ h1, h2, h3, h4, h5, h6 {
     pointer-events: auto;
   }
 
-  /* Hero page: hamburger fixed position, aligned with logo row */
+  /* Hero page: hamburger fixed position */
   .hero-fixed .mobile-menu-btn {
     position: fixed;
-    top: 28px; /* Same as lockup top for row alignment */
-    top: calc(env(safe-area-inset-top, 0px) + 28px);
-    right: 22px; /* Consistent right padding */
+    top: 24px;
+    top: calc(env(safe-area-inset-top, 0px) + 24px);
+    right: 22px;
     z-index: 9999;
-    padding: 10px;
+    padding: 8px;
     margin: 0;
   }
 
@@ -1537,13 +1537,13 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 0;
   }
 
-  /* ─── Hero Lockup: Consistent padding, aligned with hamburger ───────── */
+  /* ─── Hero Lockup: Flush with hamburger row ───────────────────────────── */
   .hero-lockup {
     position: absolute;
-    top: 28px;
-    top: calc(env(safe-area-inset-top, 0px) + 28px);
-    left: 22px; /* Consistent left padding */
-    right: 70px; /* Space for hamburger */
+    top: 24px; /* Flush with hamburger */
+    top: calc(env(safe-area-inset-top, 0px) + 24px);
+    left: 22px;
+    right: 70px;
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -1742,12 +1742,12 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 20px;
   }
 
-  /* Hero page: hamburger aligned with lockup row */
+  /* Hero page: hamburger flush with lockup */
   .hero-fixed .mobile-menu-btn {
-    top: 24px; /* Same as lockup top */
+    top: 24px;
     top: calc(env(safe-area-inset-top, 0px) + 24px);
-    right: 16px; /* Consistent right padding */
-    padding: 10px;
+    right: 16px;
+    padding: 8px;
   }
 
   /* Site header: hamburger stays in flex flow */
