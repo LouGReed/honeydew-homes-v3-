@@ -92,7 +92,7 @@ export function HeroVideo() {
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Book a Walkthrough
+                Book a Walkthrough →
               </Link>
             </div>
           </nav>
