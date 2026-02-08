@@ -1374,9 +1374,9 @@ h1, h2, h3, h4, h5, h6 {
   background: transparent;
   border: none;
   color: var(--color-gold);
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   text-transform: none;
   text-align: left;
   justify-content: flex-start;
@@ -3283,7 +3283,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ─── Texas Hero Section ───────────────────────────────────────────────── */
 .about-texas-hero {
   background-color: var(--bg-primary);
-  padding: 100px 0 60px; /* Reduced padding to show narrative in viewport */
+  padding: 140px 0 120px; /* Fill viewport on desktop - cream only above fold */
 }
 
 .about-texas-hero-content {

@@ -81,7 +81,7 @@ export default function ProcessPage() {
       {/* Work Image Band */}
       <section className="editorial-image-band-wide">
         <img
-          src={`${ASSET_PREFIX}/img/pexels/slide-work-2.png`}
+          src={`${ASSET_PREFIX}/img/pexels/gallery-ioanamtc-943.jpg`}
           alt="Completed work"
           loading="lazy"
           className="editorial-image-wide"
