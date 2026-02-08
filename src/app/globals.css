@@ -1622,12 +1622,11 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
 
-  /* Bottom-right CTA on mobile - thumb-friendly position */
+  /* Bottom-left CTA on mobile - thumb-friendly position */
   .hero-cta-bottom {
     display: block;
     position: absolute;
-    left: auto;
-    right: 22px;
+    left: 22px;
     bottom: 15vh; /* ~15% from bottom - balanced thumb reach */
     bottom: calc(env(safe-area-inset-bottom, 0px) + 15vh);
     color: #FFFFFF;
@@ -1781,7 +1780,7 @@ h1, h2, h3, h4, h5, h6 {
 
   /* Bottom CTA consistent padding */
   .hero-cta-bottom {
-    right: 16px;
+    left: 16px;
   }
 
   .site-header-logo {
@@ -1810,7 +1809,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-cta-bottom {
-    right: 12px;
+    left: 12px;
     font-size: 14px;
   }
 
