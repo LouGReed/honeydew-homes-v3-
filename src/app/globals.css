@@ -3493,7 +3493,7 @@ h1, h2, h3, h4, h5, h6 {
 .about-image-break {
   width: 100%;
   height: 60vh;
-  margin: 4rem 0;
+  margin: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -3502,7 +3502,6 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
   .about-image-break {
     height: 40vh;
-    margin: 3rem 0;
   }
 }
 
