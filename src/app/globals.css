@@ -1540,8 +1540,8 @@ h1, h2, h3, h4, h5, h6 {
   /* ─── Hero Lockup: Flush with hamburger lines ──────────────────────────── */
   .hero-lockup {
     position: absolute;
-    top: 32px; /* Aligned with hamburger lines (not container top) */
-    top: calc(env(safe-area-inset-top, 0px) + 32px);
+    top: 46px; /* Lowered to visually align with hamburger */
+    top: calc(env(safe-area-inset-top, 0px) + 46px);
     left: 22px;
     right: 70px;
     z-index: 10;
@@ -1720,8 +1720,8 @@ h1, h2, h3, h4, h5, h6 {
 
   /* Small mobile: aligned with hamburger lines */
   .hero-lockup {
-    top: 30px; /* Aligned with hamburger lines */
-    top: calc(env(safe-area-inset-top, 0px) + 30px);
+    top: 42px; /* Lowered to align with hamburger */
+    top: calc(env(safe-area-inset-top, 0px) + 42px);
     left: 16px;
     right: 56px;
   }
