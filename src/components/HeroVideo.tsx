@@ -54,7 +54,9 @@ export function HeroVideo() {
       <div className="hero-lockup">
         <h1 className="hero-lockup-wordmark">Honeydew Homes</h1>
         <p className="hero-lockup-tagline">
-          Make-ready construction in Austin. Done before the Texas sun sets.
+          <span className="tagline-line-1">Make-ready construction in Austin.</span>
+          <br className="tagline-break" />
+          <span className="tagline-line-2">Done before the Texas sun sets.</span>
         </p>
       </div>
 

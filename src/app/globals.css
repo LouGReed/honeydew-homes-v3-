@@ -620,6 +620,16 @@ h1, h2, h3, h4, h5, h6 {
     white-space: nowrap;
     max-width: none;
   }
+
+  /* Hide the mobile line break on desktop */
+  .tagline-break {
+    display: none;
+  }
+
+  /* Add space between the two parts on desktop */
+  .tagline-line-2::before {
+    content: ' ';
+  }
 }
 
 /* Subtle text-only CTA link (desktop) */
@@ -638,6 +648,26 @@ h1, h2, h3, h4, h5, h6 {
 .hero-lockup-cta:hover {
   color: #F0EFEC;
   opacity: 1;
+}
+
+/* Hero CTA - Bottom Left (visible on both desktop and mobile) */
+.hero-cta-bottom {
+  position: absolute;
+  z-index: 10;
+  left: 56px;
+  bottom: 40px;
+  font-family: var(--font-ui);
+  font-size: clamp(15px, 1.2vw, 17px);
+  font-weight: 500;
+  color: #F0EFEC;
+  background: transparent;
+  padding: 0;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.hero-cta-bottom:hover {
+  opacity: 0.85;
 }
 
 /* Mobile CTA - Bottom Left (thumb-friendly, no background container) */
@@ -1267,14 +1297,13 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   /* Minimum 44x44px tap target for accessibility */
-  min-width: 48px;
-  min-height: 48px;
-  padding: 12px;
-  background: rgba(0, 0, 0, 0.2);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  background: none;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -1452,17 +1481,18 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   /* ─── Hamburger Button: Fixed top-right, always clickable ────────────── */
+  /* ─── Hamburger: No background, aligned with lockup ───────────────────── */
   .mobile-menu-btn {
     display: flex;
     position: fixed;
-    top: 16px;
-    top: calc(env(safe-area-inset-top, 0px) + 16px);
-    right: 16px;
+    top: 20px;
+    top: calc(env(safe-area-inset-top, 0px) + 20px);
+    right: 20px;
     z-index: 9999;
     pointer-events: auto;
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 6px;
-    padding: 12px;
+    background: none;
+    border-radius: 0;
+    padding: 0;
   }
 
   .hero-logo {
@@ -1473,13 +1503,13 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 0;
   }
 
-  /* ─── Hero Lockup: Prominent brand masthead ──────────────────────────── */
+  /* ─── Hero Lockup: Flush with hamburger row ──────────────────────────── */
   .hero-lockup {
     position: absolute;
     top: 20px;
     top: calc(env(safe-area-inset-top, 0px) + 20px);
     left: 20px;
-    right: 70px; /* Space for hamburger */
+    right: 80px; /* Space for hamburger */
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -1493,23 +1523,28 @@ h1, h2, h3, h4, h5, h6 {
   /* Logo text: Large Canela serif, white, dominant */
   .hero-lockup-wordmark {
     font-family: var(--font-display);
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 500;
     color: #FFFFFF;
     letter-spacing: 0.02em;
-    line-height: 1.05;
+    line-height: 1;
     text-transform: uppercase;
     white-space: nowrap;
   }
 
-  /* Tagline below logo */
+  /* Tagline: 2 lines on mobile */
   .hero-lockup-tagline {
     font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.5;
-    margin-top: 12px;
+    margin-top: 10px;
     max-width: 100%;
+  }
+
+  /* Show the line break on mobile */
+  .tagline-break {
+    display: inline;
   }
 
   /* Hide desktop CTA on mobile, show mobile CTA */
@@ -1517,8 +1552,17 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
 
-  .hero-cta-mobile {
-    display: flex;
+  /* Bottom-left CTA on mobile */
+  .hero-cta-bottom {
+    display: block;
+    position: absolute;
+    left: 20px;
+    bottom: 24px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 500;
+    z-index: 10;
   }
 
   .site-header-logo {
@@ -2269,62 +2313,6 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: var(--color-cream);
   opacity: 0.5;
-}
-
-/* ─── FAQ Accordion ───────────────────────────────────────────────────── */
-.faq-list {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.faq-item {
-  border-bottom: 1px solid var(--color-sand-dark);
-}
-
-.faq-question {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-}
-
-.faq-question-text {
-  font-family: var(--font-ui);
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--text-primary);
-  padding-right: 24px;
-}
-
-.faq-icon {
-  font-size: 24px;
-  color: var(--text-secondary);
-  transition: transform 0.2s ease;
-}
-
-.faq-item.open .faq-icon {
-  transform: rotate(45deg);
-}
-
-.faq-answer {
-  display: none;
-  padding-bottom: 24px;
-}
-
-.faq-item.open .faq-answer {
-  display: block;
-}
-
-.faq-answer p {
-  font-family: var(--font-ui);
-  font-size: 16px;
-  color: var(--text-secondary);
-  line-height: 1.6;
 }
 
 /* ─── Contact Form ────────────────────────────────────────────────────── */

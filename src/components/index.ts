@@ -11,4 +11,3 @@ export { TexasMapDots } from './TexasMapDots';
 export { PageNav } from './PageNav';
 export { SiteHeader } from './SiteHeader';
 export { SiteFooter } from './SiteFooter';
-export { FAQAccordion } from './FAQAccordion';

@@ -156,7 +156,6 @@ export const siteConfig = {
     { label: 'About', href: '/about' },
     { label: 'Services', href: '/services' },
     { label: 'Process', href: '/process' },
-    { label: 'FAQ', href: '/faq' },
   ],
 
   social: {
