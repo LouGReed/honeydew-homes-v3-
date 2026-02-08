@@ -78,13 +78,13 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      {/* Work Image Band */}
+      {/* Cinematic Kitchen Image */}
       <section className="editorial-image-band-wide">
         <img
           src={`${ASSET_PREFIX}/img/pexels/gallery-ioanamtc-943.jpg`}
-          alt="Completed work"
+          alt="Beautiful kitchen with gold pendant lamp"
           loading="lazy"
-          className="editorial-image-wide"
+          className="editorial-image-cinematic"
         />
       </section>
 

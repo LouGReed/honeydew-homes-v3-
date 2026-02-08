@@ -2,63 +2,42 @@ import Link from 'next/link';
 import { siteConfig, BOOK_URL } from '@/config/site';
 
 export function SiteFooter() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="site-footer">
       <div className="container">
-        <div className="footer-grid">
-          {/* Brand Column */}
-          <div className="footer-col-brand">
-            <h3>Honeydew Homes</h3>
-            <p>
-              Make-ready construction for Austin realtors.
-              Photo-ready finishes, realtor timelines.
-            </p>
+        <div className="footer-main">
+          {/* Left: Brand */}
+          <div className="footer-brand">
+            <h3 className="footer-wordmark">Honeydew Homes</h3>
+            <p className="footer-tagline">Make-ready construction in Austin.</p>
           </div>
 
-          {/* Services Column */}
-          <div className="footer-col">
-            <h4>Services</h4>
-            <ul>
-              {siteConfig.footerServices.map((service, index) => (
-                <li key={index}>
-                  <Link href="/services">{service}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Column */}
-          <div className="footer-col">
-            <h4>Contact</h4>
-            <ul>
-              <li>
-                <a href={`tel:${siteConfig.phone.replace(/\D/g, '')}`}>
-                  {siteConfig.phone}
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-              </li>
-              <li>
-                <span>Austin & surrounding areas</span>
-              </li>
-              <li style={{ marginTop: '16px' }}>
-                <Link href={BOOK_URL} className="btn btn-primary" style={{ display: 'inline-block' }} target="_blank" rel="noopener noreferrer">
-                  Book a Walkthrough
-                </Link>
-              </li>
-            </ul>
+          {/* Right: Contact */}
+          <div className="footer-contact">
+            <a href={`tel:${siteConfig.phone.replace(/\D/g, '')}`} className="footer-contact-item">
+              {siteConfig.phone}
+            </a>
+            <a href={`mailto:${siteConfig.email}`} className="footer-contact-item">
+              {siteConfig.email}
+            </a>
+            <span className="footer-contact-item">Austin & surrounding areas</span>
+            <Link
+              href={BOOK_URL}
+              className="footer-cta"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Book a Walkthrough →
+            </Link>
           </div>
         </div>
+      </div>
 
-        <div className="footer-bottom">
-          <p className="footer-legal">
-            &copy; {currentYear} {siteConfig.businessName}. All rights reserved.
-          </p>
-          <p className="footer-legal">
-            {siteConfig.licensingNote}
+      {/* Bottom Bar */}
+      <div className="footer-bottom-bar">
+        <div className="container">
+          <p className="footer-fine-print">
+            © 2025 Honeydew Homes. Licensed in Texas. $1M general liability. Workers comp on all crews.
           </p>
         </div>
       </div>
