@@ -2832,6 +2832,12 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px;
 }
 
+/* Full color override - removes grayscale filter */
+.editorial-image-mono.editorial-image-color {
+  filter: none;
+  opacity: 1;
+}
+
 /* ─── Asymmetric Image (Services) ──────────────────────────────────────── */
 .editorial-image-asymmetric {
   background-color: var(--bg-primary);

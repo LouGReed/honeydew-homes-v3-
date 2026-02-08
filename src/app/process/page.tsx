@@ -146,10 +146,10 @@ export default function ProcessPage() {
       {/* Quiet Lifestyle Image - Before CTA */}
       <section className="editorial-image-quiet">
         <img
-          src={`${ASSET_PREFIX}/img/pexels/slide-home-1.jpg`}
+          src={`${ASSET_PREFIX}/img/pexels/gallery-shuraeva-full.jpg`}
           alt="Austin home"
           loading="lazy"
-          className="editorial-image-mono"
+          className="editorial-image-mono editorial-image-color"
         />
       </section>
 
