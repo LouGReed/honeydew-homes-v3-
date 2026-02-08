@@ -1627,8 +1627,8 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     position: absolute;
     left: 22px; /* Same as lockup left padding */
-    bottom: 22vh; /* ~22% from bottom for easy thumb reach */
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 22vh);
+    bottom: 15vh; /* ~15% from bottom - balanced thumb reach */
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 15vh);
     color: #FFFFFF;
     font-size: 15px;
     font-weight: 500;
@@ -2830,25 +2830,22 @@ a.footer-contact-item:hover {
   display: block;
 }
 
-/* ─── Quiet Monochrome Image ───────────────────────────────────────────── */
+/* ─── Full-Bleed Lifestyle Image ───────────────────────────────────────── */
 .editorial-image-quiet {
-  background-color: var(--bg-primary);
-  padding: 64px 0;
+  padding: 0;
+  margin: 0;
+  line-height: 0; /* Removes any inline spacing */
 }
 
 .editorial-image-mono {
   width: 100%;
-  max-width: 1200px;
-  height: 45vh;
-  min-height: 280px;
-  max-height: 420px;
+  height: 70vh;
+  min-height: 400px;
   object-fit: cover;
   object-position: center;
   display: block;
-  margin: 0 auto;
   filter: grayscale(100%) contrast(0.95);
   opacity: 0.85;
-  border-radius: 4px;
 }
 
 /* Full color override - removes grayscale filter */
@@ -3024,13 +3021,12 @@ a.footer-contact-item:hover {
   }
 
   .editorial-image-quiet {
-    padding: 32px 0;
+    padding: 0;
   }
 
   .editorial-image-mono {
-    height: 35vh;
-    min-height: 220px;
-    border-radius: 0;
+    height: 60vh;
+    min-height: 320px;
   }
 
   .process-editorial-step {
@@ -3060,8 +3056,8 @@ a.footer-contact-item:hover {
   }
 
   .editorial-image-mono {
-    height: 30vh;
-    min-height: 180px;
+    height: 50vh;
+    min-height: 280px;
   }
 
   .editorial-image-asymmetric-left img,

@@ -81,8 +81,8 @@ export default function ProcessPage() {
       {/* Cinematic Kitchen Image */}
       <section className="editorial-image-band-wide">
         <img
-          src={`${ASSET_PREFIX}/img/pexels/gallery-ioanamtc-943.jpg`}
-          alt="Beautiful kitchen with gold pendant lamp"
+          src={`${ASSET_PREFIX}/img/pexels/standout-01-alt.jpg`}
+          alt="Beautiful kitchen"
           loading="lazy"
           className="editorial-image-cinematic"
         />
