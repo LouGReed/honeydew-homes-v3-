@@ -1481,19 +1481,22 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
 
-  /* ─── Hamburger Button: Fixed top-right, always clickable ────────────── */
-  /* ─── Hamburger: No background, aligned with lockup ───────────────────── */
+  /* ─── Hamburger Button: Show on mobile ────────────────────────────────── */
   .mobile-menu-btn {
     display: flex;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    pointer-events: auto;
+  }
+
+  /* Hero page: hamburger fixed position for video background */
+  .hero-fixed .mobile-menu-btn {
     position: fixed;
     top: 20px;
     top: calc(env(safe-area-inset-top, 0px) + 20px);
     right: 20px;
     z-index: 9999;
-    pointer-events: auto;
-    background: none;
-    border-radius: 0;
-    padding: 0;
   }
 
   .hero-logo {
@@ -1701,12 +1704,19 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 20px;
   }
 
-  /* Hamburger adjustments for small screens */
-  .mobile-menu-btn {
+  /* Hero page: hamburger adjustments for small screens */
+  .hero-fixed .mobile-menu-btn {
     top: 14px;
     top: calc(env(safe-area-inset-top, 0px) + 14px);
     right: 12px;
     padding: 10px;
+  }
+
+  /* Site header: hamburger stays in flex flow */
+  .site-header .mobile-menu-btn {
+    position: relative;
+    top: auto;
+    right: auto;
   }
 
   .hero-cta-mobile {
@@ -2560,6 +2570,36 @@ h1, h2, h3, h4, h5, h6 {
 
   .site-header-nav {
     display: none;
+  }
+
+  /* ─── Site Header Mobile: Brand + Hamburger on same row ──────────────── */
+  .site-header .container {
+    padding: 0 20px;
+  }
+
+  .site-header-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .site-header-brand {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .site-header .mobile-menu-btn {
+    position: relative;
+    top: auto;
+    right: auto;
+    display: flex;
+    z-index: 10;
   }
 
   .page-hero {
