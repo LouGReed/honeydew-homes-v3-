@@ -3080,7 +3080,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ─── Texas Hero Section ───────────────────────────────────────────────── */
 .about-texas-hero {
   background-color: var(--bg-primary);
-  padding: 140px 0 80px;
+  padding: 100px 0 60px; /* Reduced padding to show narrative in viewport */
 }
 
 .about-texas-hero-content {
@@ -3127,7 +3127,7 @@ h1, h2, h3, h4, h5, h6 {
 .about-texas-map-container {
   display: flex;
   justify-content: center;
-  padding: 16px 0 24px;
+  padding: 12px 0 16px; /* Reduced padding */
 }
 
 .about-texas-map-wrapper {
@@ -3137,7 +3137,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .about-texas-map-image {
   width: 100%;
-  max-width: 720px;
+  max-width: 560px; /* Reduced to fit narrative in viewport */
   height: auto;
   display: block;
 }
