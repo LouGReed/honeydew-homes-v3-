@@ -3874,5 +3874,34 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0;
 }
 
+/* ─── Editorial Block Mobile Fix ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .editorial-block {
+    display: block; /* Override grid completely */
+  }
 
+  .editorial-block-header {
+    position: static;
+    margin-bottom: 24px;
+  }
+
+  .editorial-block-body {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .editorial-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .editorial-block-header {
+    margin-bottom: 20px;
+  }
+
+  .editorial-title {
+    font-size: 22px;
+  }
+}
 
