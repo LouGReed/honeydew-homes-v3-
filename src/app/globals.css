@@ -1504,11 +1504,11 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 0;
   }
 
-  /* ─── Hero Lockup: Flush with hamburger row ──────────────────────────── */
+  /* ─── Hero Lockup: Flush left, vertically centered with hamburger ───── */
   .hero-lockup {
     position: absolute;
-    top: 20px;
-    top: calc(env(safe-area-inset-top, 0px) + 20px);
+    top: 28px; /* 8px lower to center-align with 44px hamburger */
+    top: calc(env(safe-area-inset-top, 0px) + 28px);
     left: 20px;
     right: 80px; /* Space for hamburger */
     z-index: 10;
@@ -1677,10 +1677,10 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 var(--space-md);
   }
 
-  /* Smaller logo on small mobile - still prominent */
+  /* Smaller logo on small mobile - still prominent, centered with hamburger */
   .hero-lockup {
-    top: 14px;
-    top: calc(env(safe-area-inset-top, 0px) + 14px);
+    top: 22px; /* 8px lower to center-align with 44px hamburger */
+    top: calc(env(safe-area-inset-top, 0px) + 22px);
     left: 16px;
     right: 60px;
   }
