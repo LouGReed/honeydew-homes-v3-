@@ -18,7 +18,7 @@ export const siteConfig = {
     {
       id: 'punch-lists',
       title: 'Make-Ready Punch Lists',
-      description: 'Complete pre-listing preparation. Every item checked.',
+      description: 'Complete pre-listing preparation. Every item addressed, every detail checked.',
     },
     {
       id: 'paint',
@@ -28,22 +28,22 @@ export const siteConfig = {
     {
       id: 'flooring',
       title: 'Flooring Refresh',
-      description: 'Repairs, refinishing, or replacement. Fast turnaround.',
+      description: 'Repairs, refinishing, or full replacement. Back underfoot in days, not weeks.',
     },
     {
       id: 'landscaping',
       title: 'Landscaping + Curb Appeal',
-      description: 'First impressions that sell. Beds, lawn, walkways.',
+      description: 'First impressions that sell. Beds, lawn, mulch, and walkways.',
     },
     {
       id: 'cleaning',
       title: 'Deep Clean + Haul-Off',
-      description: 'Move-in ready from floor to ceiling. Debris gone.',
+      description: 'Move-in ready from floor to ceiling. Every trace of the old owner, gone.',
     },
     {
       id: 'carpentry',
       title: 'Light Carpentry + Repairs',
-      description: 'Doors, trim, fixtures. The details that matter.',
+      description: 'Doors, trim, fixtures — the details buyers notice first.',
     },
   ],
 
@@ -52,17 +52,17 @@ export const siteConfig = {
     {
       id: 'staging-prep',
       title: 'Staging Prep',
-      description: 'Walls patched, fixtures updated, ready for the stager.',
+      description: 'Coordinated with your stager. Walls prepped, fixtures updated, timeline synced.',
     },
     {
       id: 'pressure-washing',
       title: 'Pressure Washing',
-      description: 'Driveways, walkways, and siding refreshed.',
+      description: 'Driveways, walkways, and siding looking brand new.',
     },
     {
       id: 'window-cleaning',
       title: 'Window Cleaning',
-      description: 'Interior and exterior. Streak-free.',
+      description: 'Interior and exterior. Crystal clear, streak-free.',
     },
   ],
 
@@ -145,9 +145,9 @@ export const siteConfig = {
 
   // Values (short statements)
   values: [
-    { title: 'Clear scopes', description: 'You will know exactly what we are doing and what it costs.' },
-    { title: 'Fast turnarounds', description: 'We understand realtor timelines. We hit them.' },
-    { title: 'Jobsite respect', description: 'Clean work areas. Professional crews. No excuses.' },
+    { title: 'Clear scopes', description: 'You'll know exactly what we're doing and what it costs.' },
+    { title: 'Fast turnarounds', description: 'We understand realtor timelines. We hit them, every time.' },
+    { title: 'Jobsite respect', description: 'Clean work areas. Professional crews. No surprises.' },
   ],
 
   serviceAreas: ['Austin', 'Round Rock', 'Cedar Park', 'Georgetown', 'Pflugerville', 'Lakeway', 'Bee Cave'],
@@ -174,7 +174,7 @@ export const siteConfig = {
   ],
 
   // Licensing note
-  licensingNote: 'Licensed in Texas. $1M general liability. Workers comp on all crews.',
+  licensingNote: 'Licensed in Texas. $1M general liability. Workers' comp on every crew.',
 };
 
 export type SiteConfig = typeof siteConfig;

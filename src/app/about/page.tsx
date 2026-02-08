@@ -41,13 +41,13 @@ export default function AboutPage() {
           {/* Typography Below Map */}
           <div className="about-texas-narrative">
             <p className="about-texas-statement">
-              We started HONEYDEW because Austin realtors deserved better.
+              We started Honeydew because Austin realtors deserved better.
             </p>
             <p className="about-texas-body">
               Too many contractors miss deadlines, skip details, or disappear
-              mid-project. We built a company around what actually matters:
-              fast turnarounds, clear communication, and finishes that
-              photograph beautifully.
+              mid-project. We built a company around finishes that photograph
+              beautifully — with the fast turnarounds and clear communication
+              realtors actually need.
             </p>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function AboutPage() {
                 <span className="about-service-city about-service-more">+ surrounding communities</span>
               </div>
               <p className="about-service-tagline">
-                Local crews. Local accountability. Local pride.
+                Local crews. Local accountability. Local references.
               </p>
             </div>
           </div>
@@ -162,7 +162,7 @@ export default function AboutPage() {
         <div className="container">
           <div className="about-cta-content">
             <p className="about-cta-lead">
-              We are Texas-built, Austin-centered, and designed around realtor timelines.
+              We're Texas-built, Austin-centered, and built around realtor timelines.
             </p>
             <Link href={BOOK_URL} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
               Book a Walkthrough

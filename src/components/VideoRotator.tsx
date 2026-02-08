@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   BACKGROUND_VIDEOS,
   HERO_FALLBACK_IMAGE,
@@ -9,141 +9,102 @@ import {
 } from '@/config/assets';
 
 export function VideoRotator() {
-  // Track which video slot (A or B) is active
-  const [activeSlot, setActiveSlot] = useState<'A' | 'B'>('A');
-  const [videoIndexA, setVideoIndexA] = useState(0);
-  const [videoIndexB, setVideoIndexB] = useState(1);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [slotAReady, setSlotAReady] = useState(false);
-  const [slotBReady, setSlotBReady] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [nextIndex, setNextIndex] = useState(1);
+  const [showNext, setShowNext] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const videoRefA = useRef<HTMLVideoElement>(null);
-  const videoRefB = useRef<HTMLVideoElement>(null);
+  const currentVideoRef = useRef<HTMLVideoElement>(null);
+  const nextVideoRef = useRef<HTMLVideoElement>(null);
 
   const totalVideos = BACKGROUND_VIDEOS.length;
 
-  // Handle video ready - always try to play
-  const handleCanPlayA = useCallback(() => {
-    setSlotAReady(true);
-    if (videoRefA.current) {
-      videoRefA.current.play().catch(() => {});
+  // Mark as loaded when first video can play
+  const handleCanPlay = () => {
+    if (!isLoaded) {
+      setIsLoaded(true);
+      if (currentVideoRef.current) {
+        currentVideoRef.current.play().catch(() => {});
+      }
     }
-  }, []);
+  };
 
-  const handleCanPlayB = useCallback(() => {
-    setSlotBReady(true);
-    if (videoRefB.current) {
-      videoRefB.current.play().catch(() => {});
-    }
-  }, []);
-
-  // Rotation timer
+  // Preload next video
   useEffect(() => {
-    if (totalVideos <= 1 || isTransitioning) return;
+    if (nextVideoRef.current && isLoaded) {
+      nextVideoRef.current.load();
+    }
+  }, [nextIndex, isLoaded]);
 
-    const timer = setTimeout(() => {
-      // Determine which slot to transition TO
-      const nextSlot = activeSlot === 'A' ? 'B' : 'A';
-      const currentIndex = activeSlot === 'A' ? videoIndexA : videoIndexB;
-      const nextIndex = (currentIndex + 1) % totalVideos;
+  // Rotation timer - only start after loaded
+  useEffect(() => {
+    if (totalVideos <= 1 || !isLoaded) return;
 
-      // Set up the next video in the inactive slot
-      if (nextSlot === 'A') {
-        setVideoIndexA(nextIndex);
-        setSlotAReady(false);
-      } else {
-        setVideoIndexB(nextIndex);
-        setSlotBReady(false);
+    const timer = setInterval(() => {
+      // Start the next video playing before fade
+      if (nextVideoRef.current) {
+        nextVideoRef.current.play().catch(() => {});
       }
 
-      // Start transition after a brief delay to let the new video load
+      // Trigger crossfade
+      setShowNext(true);
+
+      // After crossfade completes, swap videos
       setTimeout(() => {
-        setIsTransitioning(true);
+        setCurrentIndex(nextIndex);
+        setNextIndex((nextIndex + 1) % totalVideos);
+        setShowNext(false);
 
-        // Play the new active video BEFORE switching opacity for smoother transition
-        const newActiveRef = nextSlot === 'A' ? videoRefA : videoRefB;
-        const oldActiveRef = nextSlot === 'A' ? videoRefB : videoRefA;
-
-        if (newActiveRef.current) {
-          newActiveRef.current.play().catch(() => {});
+        // Ensure current video is playing
+        if (currentVideoRef.current) {
+          currentVideoRef.current.play().catch(() => {});
         }
+      }, VIDEO_CROSSFADE_DURATION + 100);
 
-        // Small delay then switch active slot for crossfade
-        setTimeout(() => {
-          setActiveSlot(nextSlot);
-        }, 100);
-
-        // After transition completes, pause the old video
-        setTimeout(() => {
-          setIsTransitioning(false);
-          if (oldActiveRef.current) {
-            oldActiveRef.current.pause();
-            oldActiveRef.current.currentTime = 0;
-          }
-        }, VIDEO_CROSSFADE_DURATION + 200);
-      }, 800); // Wait 800ms for preload
     }, VIDEO_ROTATION_INTERVAL);
 
-    return () => clearTimeout(timer);
-  }, [activeSlot, videoIndexA, videoIndexB, totalVideos, isTransitioning]);
-
-  // Initial play on mount
-  useEffect(() => {
-    // Try to play immediately on mount
-    const playFirstVideo = () => {
-      if (videoRefA.current) {
-        videoRefA.current.play().catch(() => {});
-      }
-    };
-
-    // Try immediately and after a short delay
-    playFirstVideo();
-    const timer = setTimeout(playFirstVideo, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const isAActive = activeSlot === 'A';
-  const isBActive = activeSlot === 'B';
+    return () => clearInterval(timer);
+  }, [totalVideos, nextIndex, isLoaded]);
 
   return (
     <div className="video-rotator">
-      {/* Video Slot A */}
+      {/* Current Video */}
       <video
-        ref={videoRefA}
+        ref={currentVideoRef}
+        key={`current-${currentIndex}`}
         className="video-rotator-video"
-        src={BACKGROUND_VIDEOS[videoIndexA]}
+        src={BACKGROUND_VIDEOS[currentIndex]}
         autoPlay
         muted
         playsInline
         loop
         preload="auto"
         poster={HERO_FALLBACK_IMAGE}
-        onCanPlay={handleCanPlayA}
+        onCanPlayThrough={handleCanPlay}
         style={{
-          opacity: isAActive ? 1 : 0,
-          transition: `opacity ${VIDEO_CROSSFADE_DURATION}ms ease-in-out`,
-          zIndex: isAActive ? 2 : 1,
+          opacity: showNext ? 0 : 1,
+          zIndex: 2,
         }}
       />
 
-      {/* Video Slot B */}
-      <video
-        ref={videoRefB}
-        className="video-rotator-video"
-        src={BACKGROUND_VIDEOS[videoIndexB]}
-        muted
-        playsInline
-        loop
-        preload="auto"
-        poster={HERO_FALLBACK_IMAGE}
-        onCanPlay={handleCanPlayB}
-        style={{
-          opacity: isBActive ? 1 : 0,
-          transition: `opacity ${VIDEO_CROSSFADE_DURATION}ms ease-in-out`,
-          zIndex: isBActive ? 2 : 1,
-        }}
-      />
+      {/* Next Video (preloaded, fades in) */}
+      {isLoaded && (
+        <video
+          ref={nextVideoRef}
+          key={`next-${nextIndex}`}
+          className="video-rotator-video"
+          src={BACKGROUND_VIDEOS[nextIndex]}
+          muted
+          playsInline
+          loop
+          preload="auto"
+          poster={HERO_FALLBACK_IMAGE}
+          style={{
+            opacity: showNext ? 1 : 0,
+            zIndex: 1,
+          }}
+        />
+      )}
     </div>
   );
 }

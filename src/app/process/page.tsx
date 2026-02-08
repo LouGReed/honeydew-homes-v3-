@@ -12,7 +12,7 @@ export default function ProcessPage() {
         <div className="container">
           <h1 className="page-hero-title">Our Process</h1>
           <p className="page-hero-subtitle">
-            Simple, transparent, and built around realtor timelines.
+            Predictable, transparent, and built around realtor timelines.
           </p>
         </div>
       </section>
@@ -25,10 +25,10 @@ export default function ProcessPage() {
             <div className="process-editorial-content">
               <h2 className="process-editorial-title">Walkthrough</h2>
               <p className="process-editorial-desc">
-                We meet at the property. You show us the scope. We take notes,
-                ask questions, and get aligned on priorities.
+                We meet at the property. You walk us through the scope. We take notes,
+                ask questions, and get aligned on your priorities.
               </p>
-              <p className="process-editorial-detail">24–48 hour scheduling</p>
+              <p className="process-editorial-detail">Scheduled within 48 hours</p>
             </div>
           </div>
         </div>
@@ -52,10 +52,10 @@ export default function ProcessPage() {
             <div className="process-editorial-content">
               <h2 className="process-editorial-title">Scope + Estimate</h2>
               <p className="process-editorial-desc">
-                Clear line items. No surprises. You see exactly what we are doing
+                Clear line items. No surprises. You'll see exactly what we're doing
                 and what it costs before we start.
               </p>
-              <p className="process-editorial-detail">Sent same day</p>
+              <p className="process-editorial-detail">Estimate same day</p>
             </div>
           </div>
         </div>
@@ -69,10 +69,10 @@ export default function ProcessPage() {
             <div className="process-editorial-content">
               <h2 className="process-editorial-title">Schedule + Crew</h2>
               <p className="process-editorial-desc">
-                We lock in dates and assign your team. One point of contact
+                We lock in dates and assign your crew. One point of contact
                 from start to finish.
               </p>
-              <p className="process-editorial-detail">Single point of contact</p>
+              <p className="process-editorial-detail">One contact, always</p>
             </div>
           </div>
         </div>
@@ -96,10 +96,10 @@ export default function ProcessPage() {
             <div className="process-editorial-content">
               <h2 className="process-editorial-title">Daily Updates</h2>
               <p className="process-editorial-desc">
-                Photo check-ins every day until done. You always know where
-                we are and what is happening.
+                Photo check-ins every day until we're done. You'll always know
+                where things stand.
               </p>
-              <p className="process-editorial-detail">Text or email</p>
+              <p className="process-editorial-detail">Your choice: text or email</p>
             </div>
           </div>
         </div>
@@ -113,10 +113,10 @@ export default function ProcessPage() {
             <div className="process-editorial-content">
               <h2 className="process-editorial-title">Final Walkthrough</h2>
               <p className="process-editorial-desc">
-                Punch list closed. Keys ready. Your listing is photo-ready
+                Every item checked. Keys ready. Your listing is photo-ready
                 and market-ready.
               </p>
-              <p className="process-editorial-detail">Photo-ready handoff</p>
+              <p className="process-editorial-detail">Photo-ready, market-ready</p>
             </div>
           </div>
         </div>
@@ -131,12 +131,12 @@ export default function ProcessPage() {
             </div>
             <div className="editorial-block-body">
               <ul className="process-features-list">
-                <li>Lockbox or key access — we coordinate</li>
-                <li>Occupied homes OK — we have done hundreds</li>
-                <li>Daily photo updates via text or email</li>
-                <li>Single point of contact, start to finish</li>
+                <li>Lockbox or key access — we'll coordinate</li>
+                <li>Occupied homes welcome — we've done hundreds</li>
+                <li>Daily photo updates, your way</li>
+                <li>One point of contact, start to finish</li>
                 <li>Flexible scheduling around showings</li>
-                <li>Photo-ready finishes, every time</li>
+                <li>Photo-ready results, guaranteed</li>
               </ul>
             </div>
           </div>
@@ -157,7 +157,7 @@ export default function ProcessPage() {
       <section className="cta-fullbleed">
         <div className="container">
           <h2 className="cta-fullbleed-title">
-            Ready to get started?
+            Let's walk the property together.
           </h2>
           <Link href={BOOK_URL} className="btn" target="_blank" rel="noopener noreferrer">
             Book a Walkthrough

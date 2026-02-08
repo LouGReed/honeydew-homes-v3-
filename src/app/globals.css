@@ -172,6 +172,22 @@ img, video {
   display: block;
 }
 
+/* Performance: lazy render off-screen sections */
+section:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* Optimize images for faster decoding */
+img {
+  image-rendering: auto;
+  -webkit-image-rendering: auto;
+}
+
+img[loading="lazy"] {
+  background-color: var(--bg-secondary);
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -338,6 +354,9 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 100vh;
   overflow: hidden;
   background-color: #000;
+  /* Ensure hero renders immediately */
+  content-visibility: visible;
+  contain: none;
 }
 
 @supports (height: 100svh) {
@@ -409,11 +428,11 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: opacity;
+  transition: opacity 2s ease-in-out;
+  will-change: opacity, transform;
   transform: translateZ(0);
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .video-rotator-video.active {

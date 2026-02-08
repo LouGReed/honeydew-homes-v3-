@@ -12,7 +12,7 @@ export default function ServicesPage() {
         <div className="container">
           <h1 className="page-hero-title">Services</h1>
           <p className="page-hero-subtitle">
-            Make-ready construction, end-to-end. From punch lists to full turnovers.
+            Everything your listing needs to shine. From punch lists to full turnovers.
           </p>
         </div>
       </section>
@@ -88,7 +88,7 @@ export default function ServicesPage() {
                 <li>Turnover + deep clean: 3–5 days</li>
               </ul>
               <p style={{ marginTop: '24px', color: 'var(--text-secondary)' }}>
-                Timelines depend on scope and crew availability. We will give you
+                Timelines depend on scope and crew availability. We'll give you
                 a firm schedule at the walkthrough.
               </p>
             </div>
@@ -104,7 +104,7 @@ export default function ServicesPage() {
             </div>
             <div className="editorial-block-body">
               <p>
-                We are make-ready specialists, not general contractors. We focus
+                We're make-ready specialists, not general contractors. We stay focused
                 on what we do best:
               </p>
               <ul className="process-features-list" style={{ marginTop: '16px' }}>
