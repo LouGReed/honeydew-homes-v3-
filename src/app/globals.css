@@ -1490,13 +1490,15 @@ h1, h2, h3, h4, h5, h6 {
     pointer-events: auto;
   }
 
-  /* Hero page: hamburger fixed position for video background */
+  /* Hero page: hamburger fixed position, aligned with logo row */
   .hero-fixed .mobile-menu-btn {
     position: fixed;
-    top: 20px;
-    top: calc(env(safe-area-inset-top, 0px) + 20px);
-    right: 20px;
+    top: 28px; /* Same as lockup top for row alignment */
+    top: calc(env(safe-area-inset-top, 0px) + 28px);
+    right: 22px; /* Consistent right padding */
     z-index: 9999;
+    padding: 10px;
+    margin: 0;
   }
 
   .hero-logo {
@@ -1507,44 +1509,51 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 0;
   }
 
-  /* ─── Hero Lockup: Wordmark aligned with hamburger ─────────────────── */
+  /* ─── Hero Lockup: Consistent padding, aligned with hamburger ───────── */
   .hero-lockup {
     position: absolute;
-    top: 28px; /* Centers 28px wordmark with 44px hamburger (20 + 8) */
+    top: 28px;
     top: calc(env(safe-area-inset-top, 0px) + 28px);
-    left: 20px;
-    right: 80px; /* Space for hamburger */
+    left: 22px; /* Consistent left padding */
+    right: 70px; /* Space for hamburger */
     z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding: 0;
+    margin: 0;
   }
 
   .hero-lockup-logo {
     display: none; /* Use wordmark instead on mobile */
   }
 
-  /* Wordmark: Large Canela, white, aligned with hamburger */
+  /* Wordmark: BIGGER on mobile, flush left with tagline */
   .hero-lockup-wordmark {
     display: block;
     font-family: var(--font-display);
-    font-size: 28px;
+    font-size: clamp(34px, 7vw, 44px); /* Bigger on mobile */
     font-weight: 500;
     color: #FFFFFF;
     letter-spacing: 0.02em;
     line-height: 1;
     text-transform: uppercase;
     white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    max-width: calc(100vw - 100px); /* Prevent overflow into hamburger */
   }
 
-  /* Tagline: 2 lines under wordmark */
+  /* Tagline: 2 lines under wordmark, same left edge as logo */
   .hero-lockup-tagline {
     font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.9);
-    line-height: 1.5;
-    margin-top: 10px;
-    max-width: 100%;
+    line-height: 1.35;
+    margin-top: 12px;
+    margin-left: 0; /* Flush with logo */
+    padding: 0;
+    max-width: 270px; /* Forces 2-line wrap */
   }
 
   /* Each tagline line: no wrap to ensure exactly 2 lines */
@@ -1564,11 +1573,11 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
 
-  /* Bottom-left CTA on mobile */
+  /* Bottom-left CTA on mobile - consistent left padding */
   .hero-cta-bottom {
     display: block;
     position: absolute;
-    left: 20px;
+    left: 22px; /* Same as lockup left padding */
     bottom: 24px;
     bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
     color: #FFFFFF;
@@ -1681,22 +1690,23 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 var(--space-md);
   }
 
-  /* Small mobile: wordmark aligned with hamburger */
+  /* Small mobile: consistent padding, aligned elements */
   .hero-lockup {
-    top: 22px; /* Centers 28px wordmark with hamburger at top:14px */
-    top: calc(env(safe-area-inset-top, 0px) + 22px);
-    left: 16px;
-    right: 60px;
+    top: 24px;
+    top: calc(env(safe-area-inset-top, 0px) + 24px);
+    left: 16px; /* Consistent left padding */
+    right: 56px;
   }
 
   .hero-lockup-wordmark {
-    font-size: 24px; /* Slightly smaller on small screens */
+    font-size: clamp(28px, 7vw, 36px); /* Still big on small screens */
   }
 
   .hero-lockup-tagline {
     font-size: 13px;
-    line-height: 1.45;
-    margin-top: 8px;
+    line-height: 1.35;
+    margin-top: 10px;
+    max-width: 240px;
   }
 
   /* Site header brand on small mobile */
@@ -1704,11 +1714,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 20px;
   }
 
-  /* Hero page: hamburger adjustments for small screens */
+  /* Hero page: hamburger aligned with lockup row */
   .hero-fixed .mobile-menu-btn {
-    top: 14px;
-    top: calc(env(safe-area-inset-top, 0px) + 14px);
-    right: 12px;
+    top: 24px; /* Same as lockup top */
+    top: calc(env(safe-area-inset-top, 0px) + 24px);
+    right: 16px; /* Consistent right padding */
     padding: 10px;
   }
 
@@ -1719,12 +1729,9 @@ h1, h2, h3, h4, h5, h6 {
     right: auto;
   }
 
-  .hero-cta-mobile {
+  /* Bottom CTA consistent padding */
+  .hero-cta-bottom {
     left: 16px;
-    bottom: 20px;
-    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-    font-size: 14px;
-    padding: 12px 4px; /* Minimal padding for tap target */
   }
 
   .site-header-logo {
