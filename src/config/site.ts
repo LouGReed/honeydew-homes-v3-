@@ -145,7 +145,7 @@ export const siteConfig = {
 
   // Values (short statements)
   values: [
-    { title: 'Clear scopes', description: 'You'll know exactly what we're doing and what it costs.' },
+    { title: 'Clear scopes', description: 'You will know exactly what we are doing and what it costs.' },
     { title: 'Fast turnarounds', description: 'We understand realtor timelines. We hit them, every time.' },
     { title: 'Jobsite respect', description: 'Clean work areas. Professional crews. No surprises.' },
   ],
@@ -174,7 +174,7 @@ export const siteConfig = {
   ],
 
   // Licensing note
-  licensingNote: 'Licensed in Texas. $1M general liability. Workers' comp on every crew.',
+  licensingNote: 'Licensed in Texas. $1M general liability. Workers comp on every crew.',
 };
 
 export type SiteConfig = typeof siteConfig;

@@ -19,7 +19,7 @@ export const BACKGROUND_VIDEOS: string[] = [
   `${ASSET_PREFIX}/picandvideocontentforslideshow/herovideoslide.MOV`,
 ];
 
-export const HERO_FALLBACK_IMAGE = `${ASSET_PREFIX}/picandvideocontentforslideshow/hero-poster.jpg`;
+export const HERO_FALLBACK_IMAGE = `${ASSET_PREFIX}/img/pexels/gallery-lach-10397939-full.jpg`;
 
 // Video rotation settings (not used with single video, kept for compatibility)
 export const VIDEO_ROTATION_INTERVAL = 8000;

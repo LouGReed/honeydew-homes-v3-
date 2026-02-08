@@ -87,10 +87,10 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
 
-        {/* Preload hero video poster for faster LCP */}
+        {/* Preload hero fallback image for faster LCP */}
         <link
           rel="preload"
-          href={`${ASSET_PREFIX}/picandvideocontentforslideshow/hero-poster.jpg`}
+          href={`${ASSET_PREFIX}/img/pexels/gallery-lach-10397939-full.jpg`}
           as="image"
         />
 

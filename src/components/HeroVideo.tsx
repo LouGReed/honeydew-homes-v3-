@@ -19,10 +19,7 @@ export function HeroVideo() {
       {/* Layer 3: Top-to-mid Gradient Overlay for legibility */}
       <div className="hero-gradient-overlay" />
 
-      {/* Layer 4: Film Grain + Vignette Overlay */}
-      <div className="hero-grain" />
-
-      {/* Layer 5: Content */}
+      {/* Layer 4: Content */}
       <div className="hero-content">
         {/* Navigation - Top Right */}
         <nav className="hero-nav">
