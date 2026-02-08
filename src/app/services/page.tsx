@@ -121,16 +121,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Quiet Lifestyle Image - Before CTA */}
-      <section className="editorial-image-quiet">
-        <img
-          src={`${ASSET_PREFIX}/img/pexels/slide-family-3.jpg`}
-          alt="Austin family home"
-          loading="lazy"
-          className="editorial-image-mono"
-        />
-      </section>
-
       {/* CTA */}
       <section className="cta-fullbleed">
         <div className="container">
