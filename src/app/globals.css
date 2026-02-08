@@ -1537,11 +1537,11 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 0;
   }
 
-  /* ─── Hero Lockup: Flush with hamburger row ───────────────────────────── */
+  /* ─── Hero Lockup: Flush with hamburger lines ──────────────────────────── */
   .hero-lockup {
     position: absolute;
-    top: 24px; /* Flush with hamburger */
-    top: calc(env(safe-area-inset-top, 0px) + 24px);
+    top: 32px; /* Aligned with hamburger lines (not container top) */
+    top: calc(env(safe-area-inset-top, 0px) + 32px);
     left: 22px;
     right: 70px;
     z-index: 10;
@@ -1718,11 +1718,11 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 var(--space-md);
   }
 
-  /* Small mobile: consistent padding, aligned elements */
+  /* Small mobile: aligned with hamburger lines */
   .hero-lockup {
-    top: 24px;
-    top: calc(env(safe-area-inset-top, 0px) + 24px);
-    left: 16px; /* Consistent left padding */
+    top: 30px; /* Aligned with hamburger lines */
+    top: calc(env(safe-area-inset-top, 0px) + 30px);
+    left: 16px;
     right: 56px;
   }
 
