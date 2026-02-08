@@ -26,8 +26,8 @@ export const BACKGROUND_VIDEOS: string[] = [
 export const HERO_FALLBACK_IMAGE = `${ASSET_PREFIX}/picandvideocontentforslideshow/hero-poster.jpg`;
 
 // Video rotation settings
-export const VIDEO_ROTATION_INTERVAL = 5000; // 5 seconds
-export const VIDEO_CROSSFADE_DURATION = 800; // 800ms crossfade
+export const VIDEO_ROTATION_INTERVAL = 6000; // 6 seconds between transitions
+export const VIDEO_CROSSFADE_DURATION = 1500; // 1.5s smooth crossfade
 
 // ─── Brand Assets ──────────────────────────────────────────────────────
 export const LOGO_SRC = `${ASSET_PREFIX}/img/brand/honeydewlogo.png`;

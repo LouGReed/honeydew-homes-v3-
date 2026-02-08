@@ -59,9 +59,8 @@ export function VideoRotator() {
       // Start transition after a brief delay to let the new video load
       setTimeout(() => {
         setIsTransitioning(true);
-        setActiveSlot(nextSlot);
 
-        // Play the new active video
+        // Play the new active video BEFORE switching opacity for smoother transition
         const newActiveRef = nextSlot === 'A' ? videoRefA : videoRefB;
         const oldActiveRef = nextSlot === 'A' ? videoRefB : videoRefA;
 
@@ -69,15 +68,20 @@ export function VideoRotator() {
           newActiveRef.current.play().catch(() => {});
         }
 
-        // After transition, pause the old video
+        // Small delay then switch active slot for crossfade
+        setTimeout(() => {
+          setActiveSlot(nextSlot);
+        }, 100);
+
+        // After transition completes, pause the old video
         setTimeout(() => {
           setIsTransitioning(false);
           if (oldActiveRef.current) {
             oldActiveRef.current.pause();
             oldActiveRef.current.currentTime = 0;
           }
-        }, VIDEO_CROSSFADE_DURATION);
-      }, 500); // Wait 500ms for preload
+        }, VIDEO_CROSSFADE_DURATION + 200);
+      }, 800); // Wait 800ms for preload
     }, VIDEO_ROTATION_INTERVAL);
 
     return () => clearTimeout(timer);
