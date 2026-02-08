@@ -2688,6 +2688,17 @@ h1, h2, h3, h4, h5, h6 {
   .page-hero {
     padding: 120px 0 60px;
   }
+
+  /* Editorial block: stack on mobile */
+  .editorial-block {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .editorial-block-header {
+    position: relative;
+    top: 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2701,6 +2712,10 @@ h1, h2, h3, h4, h5, h6 {
 
   .site-footer {
     padding: 60px 0 32px;
+  }
+
+  .editorial-block {
+    gap: 24px;
   }
 }
 
@@ -2966,6 +2981,23 @@ h1, h2, h3, h4, h5, h6 {
 
   .process-editorial-number {
     font-size: 32px;
+  }
+
+  /* Editorial images: optimize for small screens */
+  .editorial-image-duo-item {
+    height: 30vh;
+    min-height: 200px;
+  }
+
+  .editorial-image-mono {
+    height: 30vh;
+    min-height: 180px;
+  }
+
+  .editorial-image-asymmetric-left img,
+  .editorial-image-asymmetric-right img {
+    height: 35vh;
+    min-height: 220px;
   }
 }
 
