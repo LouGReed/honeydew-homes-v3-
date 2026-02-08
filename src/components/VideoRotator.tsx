@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import {
   BACKGROUND_VIDEOS,
   HERO_FALLBACK_IMAGE,
@@ -9,19 +9,41 @@ import {
 export function VideoRotator() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Play video on mount
+  const playVideo = useCallback(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.play().catch(() => {});
+    }
+  }, []);
+
+  // Seamless loop - reset before video ends to avoid pause
+  const handleTimeUpdate = useCallback(() => {
+    const video = videoRef.current;
+    if (video && video.duration > 0) {
+      // Reset 0.15 seconds before end for seamless loop
+      if (video.currentTime >= video.duration - 0.15) {
+        video.currentTime = 0;
+      }
+    }
+  }, []);
+
+  // Autoplay on mount
   useEffect(() => {
-    const playVideo = () => {
-      if (videoRef.current) {
-        videoRef.current.play().catch(() => {});
+    const video = videoRef.current;
+    if (!video) return;
+
+    playVideo();
+
+    // Handle visibility change (tab switch)
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        playVideo();
       }
     };
 
-    playVideo();
-    // Retry for autoplay policies
-    const timer = setTimeout(playVideo, 500);
-    return () => clearTimeout(timer);
-  }, []);
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, [playVideo]);
 
   return (
     <div className="video-rotator">
@@ -32,9 +54,11 @@ export function VideoRotator() {
         autoPlay
         muted
         playsInline
-        loop
         preload="auto"
         poster={HERO_FALLBACK_IMAGE}
+        onCanPlay={playVideo}
+        onLoadedData={playVideo}
+        onTimeUpdate={handleTimeUpdate}
         style={{ opacity: 1 }}
       />
     </div>
