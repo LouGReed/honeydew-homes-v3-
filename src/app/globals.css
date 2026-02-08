@@ -1366,27 +1366,28 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.01em;
 }
 
-/* Book a Walkthrough: outline button style, separated */
+/* Book a Walkthrough: warm gold text, no border */
 .mobile-nav-links .btn-primary {
-  min-height: 52px;
+  min-height: 44px;
   margin-top: 2rem;
-  padding: 16px 28px;
+  padding: 8px 0;
   background: transparent;
-  border: 2px solid var(--color-cream);
-  color: var(--color-cream);
-  font-size: 0.875rem;
+  border: none;
+  color: var(--color-gold);
+  font-size: 1.5rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-align: center;
-  justify-content: center;
-  border-radius: 4px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  text-align: left;
+  justify-content: flex-start;
+  border-radius: 0;
+  transition: opacity 0.2s ease;
 }
 
 .mobile-nav-links .btn-primary:hover {
-  background-color: var(--color-cream);
-  color: var(--color-green);
+  background: transparent;
+  color: var(--color-gold);
+  opacity: 0.8;
 }
 
 .mobile-nav-overlay {
@@ -1620,13 +1621,13 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
 
-  /* Bottom-left CTA on mobile - consistent left padding */
+  /* Bottom-left CTA on mobile - thumb-friendly position */
   .hero-cta-bottom {
     display: block;
     position: absolute;
     left: 22px; /* Same as lockup left padding */
-    bottom: 24px;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+    bottom: 22vh; /* ~22% from bottom for easy thumb reach */
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 22vh);
     color: #FFFFFF;
     font-size: 15px;
     font-weight: 500;
