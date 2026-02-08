@@ -14,19 +14,16 @@ export interface ImageAsset {
   type?: 'image' | 'video';
 }
 
-// ─── Background Videos (rotating hero) ─────────────────────────────────
-// MP4 files for cross-browser support (H.264)
+// ─── Background Video (single hero video) ──────────────────────────────
 export const BACKGROUND_VIDEOS: string[] = [
-  `${ASSET_PREFIX}/picandvideocontentforslideshow/video-1.mp4`,
-  `${ASSET_PREFIX}/picandvideocontentforslideshow/video-2.mp4`,
-  `${ASSET_PREFIX}/picandvideocontentforslideshow/video-3.mp4`,
+  `${ASSET_PREFIX}/picandvideocontentforslideshow/herovideoslide.MOV`,
 ];
 
 export const HERO_FALLBACK_IMAGE = `${ASSET_PREFIX}/picandvideocontentforslideshow/hero-poster.jpg`;
 
-// Video rotation settings
-export const VIDEO_ROTATION_INTERVAL = 8000; // 8 seconds between transitions
-export const VIDEO_CROSSFADE_DURATION = 2000; // 2s smooth crossfade
+// Video rotation settings (not used with single video, kept for compatibility)
+export const VIDEO_ROTATION_INTERVAL = 8000;
+export const VIDEO_CROSSFADE_DURATION = 2000;
 
 // ─── Brand Assets ──────────────────────────────────────────────────────
 export const LOGO_SRC = `${ASSET_PREFIX}/img/brand/honeydewlogo.png`;

@@ -94,12 +94,12 @@ export default function RootLayout({
           as="image"
         />
 
-        {/* Preload first video */}
+        {/* Preload hero video */}
         <link
           rel="preload"
-          href={`${ASSET_PREFIX}/picandvideocontentforslideshow/video-1.mp4`}
+          href={`${ASSET_PREFIX}/picandvideocontentforslideshow/herovideoslide.MOV`}
           as="video"
-          type="video/mp4"
+          type="video/quicktime"
         />
       </head>
       <body>{children}</body>
