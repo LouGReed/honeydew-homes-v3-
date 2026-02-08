@@ -1504,11 +1504,11 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 0;
   }
 
-  /* ─── Hero Lockup: Tagline aligned with hamburger icon ─────────────── */
+  /* ─── Hero Lockup: Wordmark aligned with hamburger ─────────────────── */
   .hero-lockup {
     position: absolute;
-    top: 32px; /* Aligns tagline with hamburger bars (~42px center) */
-    top: calc(env(safe-area-inset-top, 0px) + 32px);
+    top: 28px; /* Centers 28px wordmark with 44px hamburger (20 + 8) */
+    top: calc(env(safe-area-inset-top, 0px) + 28px);
     left: 20px;
     right: 80px; /* Space for hamburger */
     z-index: 10;
@@ -1518,21 +1518,29 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-lockup-logo {
-    display: none; /* Hidden on mobile */
+    display: none; /* Use wordmark instead on mobile */
   }
 
-  /* Hide wordmark on mobile - tagline is primary */
+  /* Wordmark: Large Canela, white, aligned with hamburger */
   .hero-lockup-wordmark {
-    display: none;
+    display: block;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 500;
+    color: #FFFFFF;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
-  /* Tagline: exactly 2 lines on mobile, aligned with hamburger */
+  /* Tagline: 2 lines under wordmark */
   .hero-lockup-tagline {
     font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.5;
-    margin-top: 0; /* No margin since wordmark is hidden */
+    margin-top: 10px;
     max-width: 100%;
   }
 
@@ -1670,20 +1678,22 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 var(--space-md);
   }
 
-  /* Smaller tagline on small mobile - aligned with hamburger */
+  /* Small mobile: wordmark aligned with hamburger */
   .hero-lockup {
-    top: 26px; /* Aligns tagline with hamburger bars (~36px center) */
-    top: calc(env(safe-area-inset-top, 0px) + 26px);
+    top: 22px; /* Centers 28px wordmark with hamburger at top:14px */
+    top: calc(env(safe-area-inset-top, 0px) + 22px);
     left: 16px;
     right: 60px;
   }
 
-  /* Logo and wordmark already hidden from 768px breakpoint */
+  .hero-lockup-wordmark {
+    font-size: 24px; /* Slightly smaller on small screens */
+  }
 
   .hero-lockup-tagline {
     font-size: 13px;
     line-height: 1.45;
-    margin-top: 0;
+    margin-top: 8px;
   }
 
   /* Site header brand on small mobile */
