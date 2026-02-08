@@ -2826,7 +2826,7 @@ a.footer-contact-item:hover {
   height: 75vh;
   min-height: 500px;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 30%;
   display: block;
 }
 
