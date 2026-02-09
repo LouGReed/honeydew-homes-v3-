@@ -97,9 +97,9 @@ export default function RootLayout({
         {/* Preload hero video */}
         <link
           rel="preload"
-          href={`${ASSET_PREFIX}/picandvideocontentforslideshow/herovideoslide.MOV`}
+          href={`${ASSET_PREFIX}/picandvideocontentforslideshow/herovideoslide.webm`}
           as="video"
-          type="video/quicktime"
+          type="video/webm"
         />
       </head>
       <body>{children}</body>

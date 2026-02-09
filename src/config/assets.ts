@@ -16,7 +16,7 @@ export interface ImageAsset {
 
 // ─── Background Video (single hero video) ──────────────────────────────
 export const BACKGROUND_VIDEOS: string[] = [
-  `${ASSET_PREFIX}/picandvideocontentforslideshow/herovideoslide.MOV`,
+  `${ASSET_PREFIX}/picandvideocontentforslideshow/herovideoslide.webm`,
 ];
 
 export const HERO_FALLBACK_IMAGE = `${ASSET_PREFIX}/img/pexels/gallery-lach-10397939-full.jpg`;
